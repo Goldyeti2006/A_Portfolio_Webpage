@@ -4,7 +4,7 @@ export default function Loader() {
   const { progress } = useProgress()
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-20">
+    <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-50 fov-24">
       <div className="w-64 space-y-2">
         {/* Progress Bar Container */}
         <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
