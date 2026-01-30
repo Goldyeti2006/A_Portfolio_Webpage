@@ -17,7 +17,7 @@ function Model() {
 
 export default function ModelPage() {
   return (
-    <div className="w-full h-screen bg-gray-900 pt-20">
+    <div className="w-full h-screen bg-[#222222] pt-100">
       
       <Canvas camera={{ position: [0, 2, -3], fov: 50 }}>
         <ambientLight intensity={0.5} />
@@ -40,7 +40,7 @@ export default function ModelPage() {
     width: '100%',
     height: '100%' }} // Tailwind gray-900
         innerStyles={{ width: '300px', height: '10px', background: '#eeeeee' }} // Bar container
-        barStyles={{ background: '#3b82f6', height: '10px' }} // Blue bar
+        barStyles={{ background: '#222222', height: '10px' }} // Blue bar
         dataStyles={{ color: '#9ca3af', fontSize: '14px' }} // Text style
       />
     </div>
