@@ -6,7 +6,7 @@ import Home from "./Home.jsx";
 
 function App() {
   return (
-    <div className='pt-20'>
+    <div className='app'>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
