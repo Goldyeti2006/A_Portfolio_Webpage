@@ -9,7 +9,7 @@ export default function Landing() {
       {/* BACKGROUND IMAGE */}
       {/* Uses the file from the public folder directly */}
       <img 
-        src="/ME1.jpg" 
+        src="/ME.jpg" 
         alt="Portfolio Intro" 
         className="w-full h-full object-cover" 
       />
