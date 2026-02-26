@@ -9,6 +9,7 @@ import ESP32ProjectSection from './ESP32ProjectSection';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ProjectFolder from './ProjectFolder';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,7 +60,15 @@ function App() {
 
         {/* Extra space to make sure you can scroll and see the effect */}
         <div className="h-[50vh]"></div>
-        <ESP32ProjectSection />
+        <ProjectFolder title="ESP32 Hardware Analysis">
+            {/* The folder hides this until clicked */}
+            <ESP32ProjectSection />
+          </ProjectFolder>
+          <ProjectFolder title="Project Feather">
+            <div className="h-64 bg-neutral-900 p-8 rounded-xl flex items-center justify-center">
+              <p className="text-gray-500 font-mono">Loading browser data...</p>
+            </div>
+          </ProjectFolder>
         <div className="h-screen bg-neutral-900 flex items-center justify-center mt-10">
         <h2 className="text-4xl text-gray-500">Next Project Down Here...</h2>
       </div>
