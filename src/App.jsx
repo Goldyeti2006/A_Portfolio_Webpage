@@ -1,4 +1,4 @@
-import React,  { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import ModelPage from './ModelPage';
@@ -14,6 +14,7 @@ import ProjectFolder from './ProjectFolder';
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const [isXRayActive, setIsXRayActive] = useState(true);
   useEffect(() => {
     // 1. Initialize Lenis physics
     const lenis = new Lenis({
