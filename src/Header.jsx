@@ -70,7 +70,7 @@ export default function Header({ disableXRay }) {
           
           <ul className="flex flex-col gap-8 text-2xl font-light tracking-wide">
             <li><Link to="/" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">Home</Link></li>
-            <li><Link to="/model" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">3D Archive</Link></li>
+            <li><Link to="/me" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">3D Archive</Link></li>
             <li><a href="#projects" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">Projects</a></li>
             <li><a href="#about" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">About</a></li>
           </ul>
