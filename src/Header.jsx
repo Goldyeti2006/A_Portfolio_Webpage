@@ -69,7 +69,7 @@ export default function Header({ toggleXRay }) {
           </ul>
 
           <div className="mt-auto border-t border-white/10 pt-8">
-            <p className="text-xs text-gray-500 font-mono">SECURE_LINK: ESTABLISHED</p>
+            <p className="text-xs text-gray-500 font-mono">SECURE_LINK: _ESTABLISHED</p>
           </div>
         </div>
       </div>
