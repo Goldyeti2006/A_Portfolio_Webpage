@@ -9,6 +9,7 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectFolder from './ProjectFolder';
+import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,8 +71,11 @@ function App() {
         </div>
 
         <div className="h-screen bg-neutral-900 flex items-center justify-center mt-10">
-          <h2 className="text-4xl text-gray-500">Next Project Down Here...</h2>
+          <h2 className="text-4xl text-gray-500">Next Project Down Here..</h2>
         </div>
+      </div>
+      <div className="h-screen bg-[#121212] flex items-center justify-center">
+        <Contact />
       </div>
 
     </div>
