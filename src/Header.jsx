@@ -31,7 +31,13 @@ export default function Header({ toggleXRay }) {
               title="Toggle X-Ray"
             >
               {/* Ensure logo.png is in your public folder */}
-              <img src="/image.png" alt="Rune Logo" className="h-10 invert opacity-90 group-hover:opacity-100" />
+              <img 
+  src="/image.png" 
+  alt="Rune Logo" 
+  width="52" 
+  height="60" // Explicit dimensions stop the page from jumping
+  className="h-10 w-auto invert opacity-90 group-hover:opacity-100" 
+/>
             </button>
           </div>
 

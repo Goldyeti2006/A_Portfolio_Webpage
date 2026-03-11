@@ -34,8 +34,6 @@ export default function ProjectFolder({ title, children }) {
         </div>
       </button>
 
-      {/* THE COLLAPSIBLE CONTENT AREA */}
-      {/* Uses CSS Grid to smoothly animate height from 0 to auto */}
       <div 
         className={`grid transition-all duration-500 ease-in-out ${
           isOpen ? 'grid-rows-[1fr] opacity-100 pb-10' : 'grid-rows-[0fr] opacity-0'

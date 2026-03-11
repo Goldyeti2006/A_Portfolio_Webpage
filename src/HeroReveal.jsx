@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // --- SUB-COMPONENT: Live Scrolling Terminal Logs ---
 const LiveTerminal = () => {
@@ -44,15 +44,17 @@ const LiveTerminal = () => {
 // Notice we added { isXRayActive } right here:
 export default function HeroReveal({ isXRayActive }) {
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 }); // Starts off-screen
-
+  const containerRef = useRef(null);
   const handleMouseMove = (e) => {
-    // If the X-Ray is turned off, ignore mouse movement to save performance
-    if (!isXRayActive) return;
+    if (!isXRayActive || !containerRef.current) return;
     
-    const rect = e.currentTarget.getBoundingClientRect();
+    // 2. Use the Ref to get the container position ONCE per move
+    // This is much faster than getBoundingClientRect()
+    const { left, top } = containerRef.current.getBoundingClientRect();
+    
     setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x: e.clientX - left,
+      y: e.clientY - top,
     });
   };
 
@@ -67,7 +69,7 @@ export default function HeroReveal({ isXRayActive }) {
   };
 
   return (
-    <div 
+    <div ref={containerRef} // 3. Attach the ref here
       className="relative w-full h-screen overflow-hidden cursor-crosshair bg-[#0a0a0a]"
       onMouseMove={handleMouseMove}
     >
