@@ -44,7 +44,7 @@ export default function LoadingScreen({ onComplete }) {
     <div 
       ref={screenRef}
       className="fixed inset-0 z-[200] bg-[#0a0a0a] flex items-center justify-center overflow-hidden"
-    >
+      > 
       {/* The Animated Logo */}
       <img 
         ref={logoRef}

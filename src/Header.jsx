@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Header({ toggleXRay }) {
+export default function Header({ isXRayActive, toggleXRay, startTransition }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-
+  const handleNavClick = (targetId) => {
+    setIsSidebarOpen(false); 
+    
+    // 2. Start : black liquid curve animation
+    startTransition(); 
+    setTimeout(() => {
+      const target = document.querySelector(targetId);
+      if (target) {
+        // Lenis will still keep it physically smooth
+        window.scrollTo({
+          top: target.offsetTop,
+          behavior: 'instant' 
+        });
+      }
+    }, 800); 
+  };
   const getPageName = () => {
     if (location.pathname === '/') return 'HOME';
     if (location.pathname === '/model') return '3D MODEL';
@@ -18,7 +33,7 @@ export default function Header({ toggleXRay }) {
           
           {/* LEFT: Current Page Name */}
           <div className="w-1/3 text-left">
-            <span className="text-base tracking-[0.3em] font-semibold uppercase opacity-80">
+            <span className="text-base text-xl tracking-[0.3em] font-semibold uppercase opacity-80">
               {getPageName()}
             </span>
           </div>
@@ -32,25 +47,70 @@ export default function Header({ toggleXRay }) {
             >
               {/* Ensure logo.png is in your public folder */}
               <img 
-  src="/image.png" 
-  alt="Rune Logo" 
-  width="52" 
-  height="60" // Explicit dimensions stop the page from jumping
-  className="h-10 w-auto invert opacity-90 group-hover:opacity-100" 
-/>
+              src="/image.png" 
+              alt="Rune Logo" 
+              width="52" 
+              height="60" // Explicit dimensions stop the page from jumping
+              className="h-10 w-auto invert opacity-90 group-hover:opacity-100" 
+        />
             </button>
           </div>
 
           {/* RIGHT: Contact & Sidebar Trigger */}
-          <div className="w-1/3 flex justify-end gap-8 text-base tracking-widest font-semibold uppercase opacity-80">
-            <button className="hover:text-emerald-400 transition-colors">Contact</button>
-            <button 
-              onClick={() => setIsSidebarOpen(true)}
-              className="hover:text-emerald-400 transition-colors"
-            >
-              Menu
-            </button>
-          </div>
+          <div className="w-1/3 flex justify-end gap-8 text-xl tracking-widest font-semibold uppercase opacity-80 mix-blend-normal">
+  
+  {/* Contact - boxed with slide fill */}
+  <button onClick={() => {}} className="
+    group relative overflow-hidden
+    px-5 py-2
+    border border-white/40 hover:border-white
+    bg-transparent hover:bg-black
+    text-white hover:text-white
+    outline-none appearance-none
+    cursor-pointer
+    transition-all duration-200 
+    corner rounded-lg
+  ">
+    {/* White fill that slides in from left */}
+    <span className="
+      absolute inset-0 bg-emerald-400
+      -translate-x-full group-hover:translate-x-0
+      transition-transform duration-200 ease-out
+      z-0
+    "/>
+    {/* Text flips color as fill slides in */}
+    <span className="relative z-10 group-hover:text-black transition-colors duration-200">
+      Lets Connect
+    </span>
+  </button>
+
+  {/* Menu stays as plain text */}
+  <button 
+    onClick={() => setIsSidebarOpen(true)}
+    className="
+    group relative overflow-hidden
+    px-5 py-2
+    border border-white/40 hover:border-white
+    bg-transparent hover:bg-black
+    text-white hover:text-white
+    outline-none appearance-none
+    cursor-pointer
+    transition-all duration-200
+    corner rounded-lg
+  ">
+    {/* White fill that slides in from left */}
+    <span className="
+      absolute inset-0 bg-emerald-400
+      -translate-x-full group-hover:translate-x-0
+      transition-transform duration-200 ease-out
+      z-0
+    "/>
+    {/* Text flips color as fill slides in */}
+    <span className="relative z-10 group-hover:text-black transition-colors duration-200">
+      Menu
+    </span>
+  </button>
+</div>
 
         </nav>
       </header>
@@ -64,14 +124,19 @@ export default function Header({ toggleXRay }) {
       <div className={`fixed top-0 right-0 h-full w-80 bg-[#0a0a0a] border-l border-white/10 z-[120] transform transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="p-10 flex flex-col h-full text-white">
           <div className="flex justify-between items-center mb-16">
-            <span className="text-xs tracking-[0.3em] text-gray-500 uppercase">Navigation</span>
+            <span className="text-lg tracking-[0.3em] text-gray-500 uppercase">Navigation</span>
             <button onClick={() => setIsSidebarOpen(false)} className="text-2xl hover:text-emerald-400">&times;</button>
           </div>
           
           <ul className="flex flex-col gap-8 text-2xl font-light tracking-wide">
             <li><Link to="/" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">Home</Link></li>
             <li><Link to="/model" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">3D Archive</Link></li>
-            <li><a href="#projects" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">Projects</a></li>
+            <li><button 
+              onClick={() => handleNavClick('#projects')} 
+              className="text-2xl hover:text-emerald-400 transition-colors tracking-widest"
+            >
+              Projects
+            </button></li>
           </ul>
 
           <div className="mt-auto border-t border-white/10 pt-8">

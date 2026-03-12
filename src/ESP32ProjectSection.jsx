@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, Environment } from '@react-three/drei';
 import gsap from 'gsap';
@@ -45,7 +45,6 @@ function ESP32Scene({ scrollProgress }) {
 
   return (
     <group ref={modelRef} position={[0, 0, 0]}>
-      {/* We add your loaded model here */}
       <primitive object={scene} />
     </group>
   );
@@ -57,42 +56,70 @@ export default function ESP32ProjectSection() {
   const sectionRef = useRef(null);
   const textContainerRef = useRef(null);
   const scrollProgress = useRef(0);
+  const [isVisible, setIsVisible] = useState(false);
+ 
+   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { rootMargin: '200px' } // Start loading 200px before it's visible
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
-  useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-      
+  useEffect(() => {
+  let ctx; // Declare ctx outside so cleanup can reach it
+
+  const timer = setTimeout(() => {
+    // Guard: if refs aren't ready yet, bail out
+    if (!sectionRef.current || !textContainerRef.current) return;
+
+    ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "center center",
-          end: "+=300%", // Controls how long the user has to scroll to finish the animation
+          end: "+=125%",
           pin: true,
-          scrub: 1, // Matches your original scrub smoothness
+          scrub: 1,
           onUpdate: (self) => {
-            // Send the scroll percentage (0 to 1) to the 3D scene
             scrollProgress.current = self.progress;
           },
         }
       });
-
-      // Text fade-in animation
-      tl.fromTo(textContainerRef.current, 
-        { opacity: 0, x: 50 }, 
+      tl.fromTo(
+        textContainerRef.current,
+        { opacity: 0, x: 50 },
         { opacity: 1, x: 0, duration: 1, ease: "power2.out" },
         0.5
       );
-      
     }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+    ScrollTrigger.refresh(); // Outside ctx, runs after registration
+  }, 300);
 
+  // Proper cleanup: cancel the timer AND revert GSAP
+  return () => {
+    clearTimeout(timer);
+    ctx?.revert();
+  };
+}, []);
   return (
     <section ref={sectionRef} className="relative h-screen w-full bg-[#121212] overflow-hidden">
       
       {/* THE 3D CANVAS */}
       <div className="absolute inset-0 z-0">
-        <Canvas>
+        <Canvas  gl={{ alpha: true,
+            powerPreference: "high-performance",
+            antialias: false
+         }} 
+          frameloop="always" 
+          onCreated={({ gl }) => {
+    gl.domElement.addEventListener('webglcontextlost', (e) => {
+      e.preventDefault(); // Allows context to be restored
+    });
+          }}
+          >
           {/* Matches your Ambient Light setup */}
           <ambientLight intensity={1.0} color={0x404040} />
           <Environment preset="city" /> 
@@ -106,16 +133,43 @@ export default function ESP32ProjectSection() {
         ref={textContainerRef}
         className="absolute inset-0 z-10 flex flex-col justify-center items-start p-10 md:p-20 pointer-events-none opacity-0"
       >
-        <div className="max-w-xl bg-black/50 p-8 rounded-xl backdrop-blur-md border border-white/10">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            ESP32 Architecture
-          </h2>
-          <p className="text-gray-300">
-            This is where your project details appear as the board rotates into its final top-down view.
-          </p>
+        <div className="max-w-xl bg-black/50 p-8 rounded-xl backdrop-blur-md border border-white/10 text-white">
+         <h3 className="text-2xl font-bold mb-2">Twiny: BLE-Controlled Rogue AP</h3>
+         
+         <p className="project-pitch mb-4">
+           <strong>Hybrid Hardware & Mobile Security Tool</strong><br />
+           A custom Flutter app and ESP32 firmware combo that demonstrates "Evil Twin" Wi-Fi attacks using a stealthy Bluetooth Command & Control (C2) channel.
+         </p>
+
+         <div className="project-section mb-4">
+           <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Tech Stack</h4>
+           <ul className="list-disc pl-5">
+             <li><strong>Frontend:</strong> Flutter (Dart), flutter_blue_plus</li>
+             <li><strong>Hardware:</strong> ESP32 (C++), Async Web Server, DNS Server</li>
+             <li><strong>Protocols:</strong> BLE (GATT), 802.11 AP, HTTP/DNS Spoofing</li>
+           </ul>
+         </div>
+
+         <div className="project-section mb-4">
+           <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Key Features</h4>
+           <ul className="list-disc pl-5">
+             <li><strong>Out-of-Band C2:</strong> Triggers the Wi-Fi attack over Bluetooth, keeping the network radio completely hidden from web scanners.</li>
+             <li><strong>Captive Portal:</strong> Uses DNS spoofing to trap devices and force them to a localized, responsive login page.</li>
+             <li><strong>Real-Time Exfiltration:</strong> Captures credentials and streams them instantly to the mobile app via BLE notifications.</li>
+           </ul>
+         </div>
+
+         <p className="project-concepts mb-4 text-sm text-gray-300">
+           <strong>Concepts Mastered:</strong> Man-in-the-Middle (MITM) mechanics, Mobile-to-Hardware integration, and Wireless Authentication vulnerabilities.
+         </p>
+
+         <p className="project-disclaimer text-xs text-gray-500 italic mt-6 border-t border-gray-700 pt-2">
+           Disclaimer: Developed strictly for educational purposes and ethical security research in isolated environments.
+         </p>
         </div>
       </div>
 
     </section>
   );
 }
+useGLTF.preload('/model1.glb');

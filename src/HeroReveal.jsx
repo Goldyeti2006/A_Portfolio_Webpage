@@ -134,7 +134,7 @@ export default function SecurityCore() {
         style={getMaskStyle()}
       >
          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight mb-4 text-center">
-            Beautifully <br/> Crafted.
+            Securely designed <br/> Creatively hardened.
          </h1>
          <p className="text-xl md:text-2xl font-light text-center max-w-2xl text-gray-600">
             Clean interfaces masking impenetrable architecture.

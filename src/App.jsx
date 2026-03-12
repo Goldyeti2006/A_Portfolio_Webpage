@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Header';
-import ModelPage from './ModelPage';
 import Home from './Home';
 import HeroReveal from './HeroReveal';
 import Lenis from 'lenis';
@@ -9,15 +8,16 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectFolder from './ProjectFolder';
 import Contact from './Contact';
-import LoadingScreen from './LoadingScreen'; // Make sure to create this file!
+import LoadingScreen from './LoadingScreen';
+import ESP32ProjectSection from './ESP32ProjectSection';
+import PageTransition from './PageTransition';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const ESP32ProjectSection = lazy(() => import('./ESP32ProjectSection'));
+const ModelPage = lazy(() => import('./ModelPage'));
 function App() {
   const [isXRayActive, setIsXRayActive] = useState(true);
-  const [isLoading, setIsLoading] = useState(true); // Control the intro
-
+  const [isLoading, setIsLoading] = useState(true); 
+  const [isTransitioning, setIsTransitioning] = useState(false);
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -40,13 +40,17 @@ function App() {
     <div className="relative w-full no-scrollbar">
       
       {/* 1. LOADING OVERLAY: Stays on top until it completes */}
+      <PageTransition 
+        isTriggered={isTransitioning} 
+        onComplete={() => setIsTransitioning(false)} 
+      />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
 
-      {/* 2. THE HEADER: Hidden until loading finishes, then fades in */}
       <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Header 
           isXRayActive={isXRayActive} 
           toggleXRay={() => setIsXRayActive(!isXRayActive)} 
+          startTransition={() => setIsTransitioning(true)}
         />
       </div>
       
@@ -54,20 +58,13 @@ function App() {
       <HeroReveal isXRayActive={isXRayActive} />
 
       {/* 4. SCROLLING CONTENT */}
-      <div className="relative z-10 bg-[#121212] mt-[100vh] shadow-[0_-20px_50px_rgba(0,0,0,0.8)]">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/model" element={<ModelPage />} />
-        </Routes>
-
-        <div className="h-[50vh]"></div>
-        
-        <div className="max-w-7xl mx-auto px-6">
-          <Suspense fallback={<div className="h-96 flex items-center justify-center text-gray-500">Loading 3D Module...</div>}>
+      <div className="h-60 bg-neutral-900 flex items-center justify-center mt-10"></div>
+      <div id="home" className="max-w-7xl mx-auto px-6">
+        <Home />
+        <div id="projects" className="max-w-7xl mx-auto px-6">
           <ProjectFolder title="ESP32 Hardware Analysis">
             <ESP32ProjectSection />
           </ProjectFolder>
-        </Suspense>
           <ProjectFolder title="Project Feather">
             <div className="h-64 bg-neutral-900 p-8 rounded-xl flex items-center justify-center">
               <p className="text-gray-500 font-mono">Loading browser data...</p>
@@ -80,7 +77,7 @@ function App() {
         </div>
       </div>
 
-      <div className="h-screen bg-[#121212] flex items-center justify-center">
+      <div id="contact" className="h-screen bg-[#121212] flex items-center justify-center">
         <Contact />
       </div>
 
