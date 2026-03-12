@@ -28,7 +28,7 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-[100] p-6 mix-blend-difference text-white pointer-events-none">
+      <header className={`fixed top-0 left-0 w-full z-[100] p-6 mix-blend-difference text-white pointer-events-none isolate`}>
         <nav className="flex justify-between items-center max-w-7xl mx-auto w-full pointer-events-auto">
           
           {/* LEFT: Current Page Name */}
@@ -57,20 +57,27 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
           </div>
 
           {/* RIGHT: Contact & Sidebar Trigger */}
-          <div className="w-1/3 flex justify-end gap-8 text-xl tracking-widest font-semibold uppercase opacity-80 mix-blend-normal">
+   <div className="w-1/3 flex justify-end
+                    gap-8 
+                    text-xl 
+                    tracking-widest 
+                    font-semibold 
+                    uppercase 
+                    opacity-80 
+                    isolate">
   
   {/* Contact - boxed with slide fill */}
   <button onClick={() => {}} className="
-    group relative overflow-hidden
-    px-5 py-2
-    border border-white/40 hover:border-white
-    bg-transparent hover:bg-black
-    text-white hover:text-white
-    outline-none appearance-none
-    cursor-pointer
-    transition-all duration-200 
-    corner rounded-lg
-  ">
+          group relative overflow-hidden
+          px-5 py-2
+          border border-white/40 hover:border-white
+          bg-[#FAF3E1] hover:bg-#000000/0
+          text-black hover:text-white
+          outline-none appearance-none
+          cursor-pointer
+          transition-all duration-200 
+          corner rounded-lg
+        ">
     {/* White fill that slides in from left */}
     <span className="
       absolute inset-0 bg-emerald-400
@@ -79,7 +86,11 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
       z-0
     "/>
     {/* Text flips color as fill slides in */}
-    <span className="relative z-10 group-hover:text-black transition-colors duration-200">
+    <span className="relative 
+                      z-10 
+                      group-hover:text-black 
+                      transition-colors 
+                      duration-200">
       Lets Connect
     </span>
   </button>
@@ -87,26 +98,27 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
   {/* Menu stays as plain text */}
   <button 
     onClick={() => setIsSidebarOpen(true)}
-    className="
+    className='
     group relative overflow-hidden
     px-5 py-2
     border border-white/40 hover:border-white
-    bg-transparent hover:bg-black
-    text-white hover:text-white
+    bg-[#FAF3E1] hover:bg-#000000/0
+    text-black hover:text-white
     outline-none appearance-none
     cursor-pointer
     transition-all duration-200
     corner rounded-lg
-  ">
+  '>
     {/* White fill that slides in from left */}
-    <span className="
-      absolute inset-0 bg-emerald-400
+        <span className={`
+      absolute inset-0
+      ${isXRayActive ? 'bg-emerald-400' : 'bg-[#FF3831]'}
       -translate-x-full group-hover:translate-x-0
-      transition-transform duration-200 ease-out
-      z-0
-    "/>
+      transition-transform duration-200 ease-out z-0
+    `}/>
     {/* Text flips color as fill slides in */}
-    <span className="relative z-10 group-hover:text-black transition-colors duration-200">
+    <span className={`relative z-10 transition-colors duration-200
+    ${isXRayActive ? 'group-hover:text-white' : 'group-hover:text-[#FAF3E1]'}`}>
       Menu
     </span>
   </button>
@@ -129,7 +141,12 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
           </div>
           
           <ul className="flex flex-col gap-8 text-2xl font-light tracking-wide">
-            <li><Link to="/" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">Home</Link></li>
+            <li><button 
+              onClick={() => handleNavClick('#home')} 
+              className="text-2xl hover:text-emerald-400 transition-colors tracking-widest"
+            >
+              Home
+            </button></li>
             <li><Link to="/model" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">3D Archive</Link></li>
             <li><button 
               onClick={() => handleNavClick('#projects')} 

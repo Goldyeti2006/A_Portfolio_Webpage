@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { useEffect, useState, Suspense, lazy, useRef} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
@@ -11,13 +11,16 @@ import Contact from './Contact';
 import LoadingScreen from './LoadingScreen';
 import ESP32ProjectSection from './ESP32ProjectSection';
 import PageTransition from './PageTransition';
+import { useScrollBreaker } from './useScrollBreaker';
 
 gsap.registerPlugin(ScrollTrigger);
 const ModelPage = lazy(() => import('./ModelPage'));
+
 function App() {
   const [isXRayActive, setIsXRayActive] = useState(true);
   const [isLoading, setIsLoading] = useState(true); 
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const lenisRef = useRef(null);
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -26,16 +29,16 @@ function App() {
       touchMultiplier: 2, 
     });
 
+    lenisRef.current = lenis;
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0, 0);
-
     return () => {
       lenis.destroy();
       gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, []);
-
+  useScrollBreaker(lenisRef, ['home', 'projects', 'contact'], 380);
   return (
     <div className="relative w-full no-scrollbar">
       
@@ -56,12 +59,11 @@ function App() {
       
       {/* 3. LANDING PAGE CONTENT */}
       <HeroReveal isXRayActive={isXRayActive} />
-
-      {/* 4. SCROLLING CONTENT */}
-      <div className="h-60 bg-neutral-900 flex items-center justify-center mt-10"></div>
-      <div id="home" className="max-w-7xl mx-auto px-6">
+      <div id="home" className="max-w-7xl mx-auto px-6"></div>
         <Home />
         <div id="projects" className="max-w-7xl mx-auto px-6">
+          <div className="h-20 flex text-3xl items-center justify-center text-[#FF3831]"></div>
+          <div className="h-20 flex text-6xl items-center justify-center text-[#FAF3E1]"><div className='text-[#FF3831]'>Projects__</div>i've Worked on</div>
           <ProjectFolder title="ESP32 Hardware Analysis">
             <ESP32ProjectSection />
           </ProjectFolder>
@@ -71,11 +73,6 @@ function App() {
             </div>
           </ProjectFolder>
         </div>
-
-        <div className="h-screen bg-neutral-900 flex items-center justify-center mt-10">
-          <h2 className="text-4xl text-gray-500">Next Project Down Here..</h2>
-        </div>
-      </div>
 
       <div id="contact" className="h-screen bg-[#121212] flex items-center justify-center">
         <Contact />

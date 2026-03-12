@@ -23,7 +23,7 @@ export default function ProjectFolder({ title, children }) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center py-8 text-left group"
       >
-        <h3 className="text-3xl md:text-5xl font-bold text-gray-400 group-hover:text-white transition-colors duration-300">
+        <h3 className="text-3xl md:text-4xl font-bold text-gray-400 group-hover:text-white transition-colors duration-300">
           {title}
         </h3>
         

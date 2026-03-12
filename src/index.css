@@ -44,14 +44,3 @@ html, body {
     scrollbar-width: none;  /* Firefox */
   }
 }
-
-button {
-  background: transparent;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  padding: 0;
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-}

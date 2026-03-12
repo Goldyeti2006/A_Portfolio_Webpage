@@ -130,7 +130,7 @@ export default function SecurityCore() {
           LAYER 2: THE DESIGN FRONTEND (Light) 
           ========================================= */}
       <div 
-        className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 text-slate-900 p-10 z-10 pointer-events-none transition-all duration-700"
+        className="absolute inset-0 flex flex-col items-center justify-center bg-[#FAF3E1] text-slate-900 p-10 z-10 pointer-events-none transition-all duration-700"
         style={getMaskStyle()}
       >
          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight mb-4 text-center">
