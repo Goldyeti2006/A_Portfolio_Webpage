@@ -12,14 +12,15 @@ import LoadingScreen from './LoadingScreen';
 import ESP32ProjectSection from './ESP32ProjectSection';
 import PageTransition from './PageTransition';
 import { useScrollBreaker } from './useScrollBreaker';
+import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
 const ModelPage = lazy(() => import('./ModelPage'));
-
 function App() {
   const [isXRayActive, setIsXRayActive] = useState(true);
   const [isLoading, setIsLoading] = useState(true); 
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [pendingTarget, setPendingTarget] = useState(null);
   const lenisRef = useRef(null);
   useEffect(() => {
     const lenis = new Lenis({
@@ -38,6 +39,17 @@ function App() {
       gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, []);
+  useEffect(() => {
+  const handleScroll = () => {
+    const heroHeight = window.innerHeight; // hero is 100vh
+    if (window.scrollY > heroHeight * 0.8) { // 80% past hero
+      setIsXRayActive(false);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
   useScrollBreaker(lenisRef, ['home', 'projects', 'contact'], 380);
   return (
     <div className="relative w-full no-scrollbar">
@@ -45,6 +57,13 @@ function App() {
       {/* 1. LOADING OVERLAY: Stays on top until it completes */}
       <PageTransition 
         isTriggered={isTransitioning} 
+        onCover={() => {                          // ← fires when screen is fully black
+          if (pendingTarget) {
+            const el = document.querySelector(pendingTarget);
+            if (el) window.scrollTo({ top: el.offsetTop, behavior: 'instant' });
+            setPendingTarget(null);
+          }
+        }}
         onComplete={() => setIsTransitioning(false)} 
       />
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
@@ -53,7 +72,7 @@ function App() {
         <Header 
           isXRayActive={isXRayActive} 
           toggleXRay={() => setIsXRayActive(!isXRayActive)} 
-          startTransition={() => setIsTransitioning(true)}
+          startTransition={(targetId) => { setIsTransitioning(true); setPendingTarget(targetId); }}
         />
       </div>
       
@@ -63,7 +82,7 @@ function App() {
         <Home />
         <div id="projects" className="max-w-7xl mx-auto px-6">
           <div className="h-20 flex text-3xl items-center justify-center text-[#FF3831]"></div>
-          <div className="h-20 flex text-6xl items-center justify-center text-[#FAF3E1]"><div className='text-[#FF3831]'>Projects__</div>i've Worked on</div>
+          <div className="h-20 flex text-6xl items-center justify-center text-[#FAF3E1]"><div className="text-[#FF3831] vintage-font text-7xl mr-4">Projects </div>i've Worked on</div>
           <ProjectFolder title="ESP32 Hardware Analysis">
             <ESP32ProjectSection />
           </ProjectFolder>

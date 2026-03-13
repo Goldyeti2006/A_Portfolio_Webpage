@@ -44,3 +44,12 @@ html, body {
     scrollbar-width: none;  /* Firefox */
   }
 }
+@font-face {
+  font-family: 'Vintage';
+  src: url('./assets/font/Bokor-Regular.ttf') format('true-type');
+  font-weight: normal;
+  font-style: normal;
+}
+.vintage-text {
+  font-family: 'Vintage', !important;
+}

@@ -6,7 +6,7 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
   const location = useLocation();
   const handleNavClick = (targetId) => {
     setIsSidebarOpen(false); 
-    
+    startTransition(targetId);
     // 2. Start : black liquid curve animation
     startTransition(); 
     setTimeout(() => {

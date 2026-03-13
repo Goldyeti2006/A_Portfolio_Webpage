@@ -28,7 +28,7 @@ export function useScrollBreaker(lenisRef, sectionIds, pauseDuration = 200) {
         lastScroll.current = scroll;
 
         const crossed = getThresholds().find(({ top }) => {
-          const buffer = top < 50 ? 60 : 80;
+          const buffer = top < 800 ? 40 : 30;
           return Math.abs(scroll - top) < buffer;
         });
 

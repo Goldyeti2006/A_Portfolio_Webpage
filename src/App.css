@@ -1,0 +1,12 @@
+/* src/App.css */
+@font-face {
+  font-family: 'Vintage';
+  /* This assumes App.css and assets/ are both in src/ */
+  src: url('./assets/fonts/Bokor-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.vintage-font {
+  font-family: 'Vintage', serif !important;
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-export default function PageTransition({ isTriggered, onComplete }) {
+export default function PageTransition({ isTriggered,  onCover, onComplete }) {
   const containerRef = useRef(null);
   const pathRef = useRef(null);
 
@@ -16,33 +16,27 @@ export default function PageTransition({ isTriggered, onComplete }) {
 
 tl.set(containerRef.current, { display: 'block' })
 
-  // Collapsed at bottom-left
   .fromTo(pathRef.current,
-    { attr: { d: 'M 0 100  L 0 100  L 0 100  Q 0 100 0 100  Z' } },
-    // Leading edge bows RIGHT (Q x=140 pushes curve outward beyond the screen)
-    { attr: { d: 'M 0 0  L 0 100  L 100 100  Q 140 50 100 0  Z' },
-      duration: 0.7, ease: 'power3.in' }
+    // Collapsed — all at BL corner (outside viewBox so no flash)
+    { attr: { d: 'M -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 Z' } },
+
+    // Corners as anchors, edges bow outward — guaranteed full coverage
+    { attr: { d: 'M -10 -10 C 50 -60 50 -60 110 -10 C 160 50 160 50 110 110 C 50 160 50 160 -10 110 C -60 50 -60 50 -10 -10 Z' },
+      duration: 1.4, ease: 'power3.inOut' }
   )
 
-  // Full screen — flatten the bow
   .to(pathRef.current,
-    { attr: { d: 'M 0 0  L 0 100  L 100 100  Q 100 50 100 0  Z' },
+    { attr: { d: 'M -10 -10 C 50 -60 50 -60 110 -10 C 160 50 160 50 110 110 C 50 160 50 160 -10 110 C -60 50 -60 50 -10 -10 Z' },
       duration: 0.15, ease: 'none' }
   )
 
-  // Exit: left side peels away, right bows LEFT as it leaves
-  .to(pathRef.current,
-    { attr: { d: 'M 0 0  L 0 100  L 60 100  Q -40 50 60 0  Z' },
-      duration: 0.45, ease: 'power3.in' }
-  )
+  .to(containerRef.current, {
+    duration: 0.4,
+    onComplete: () => onCover?.()
+  })
 
-  // Collapse to top-right
-  .to(pathRef.current,
-    { attr: { d: 'M 100 0  L 100 0  L 100 0  Q 100 0 100 0  Z' },
-      duration: 0.45, ease: 'power3.out' }
-  )
-
-  .set(containerRef.current, { display: 'none' });
+  .set(containerRef.current, { display: 'none' })
+  .call(() => onComplete());
 }, [isTriggered, onComplete]);
 
   return (
