@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import './App.css';
 
 export default function Header({ isXRayActive, toggleXRay, startTransition }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -28,12 +29,12 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-[100] p-6 mix-blend-difference text-white pointer-events-none isolate`}>
+      <header className={`fixed top-0 left-0 w-full z-[100] p-6 mix-blend-difference text-white pointer-events-none `}>
         <nav className="flex justify-between items-center max-w-7xl mx-auto w-full pointer-events-auto">
           
           {/* LEFT: Current Page Name */}
           <div className="w-1/3 text-left">
-            <span className="text-base text-xl tracking-[0.3em] font-semibold uppercase opacity-80">
+            <span className="text-base text-3xl tracking-[0.3em] font-semibold uppercase opacity-80">
               {getPageName()}
             </span>
           </div>
@@ -71,26 +72,23 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
           group relative overflow-hidden
           px-5 py-2
           border border-white/40 hover:border-white
-          bg-[#FAF3E1] hover:bg-#000000/0
-          text-black hover:text-white
+          bg-[#FF3831] hover:bg-#000000/0
+          text-[#fffdd0] hover:text-white
           outline-none appearance-none
           cursor-pointer
-          transition-all duration-200 
+          transition-all duration-200
           corner rounded-lg
         ">
     {/* White fill that slides in from left */}
-    <span className="
-      absolute inset-0 bg-emerald-400
+   <span className={`
+      absolute inset-0
+      ${isXRayActive ? 'bg-emerald-400' : 'bg-[#fffdc9]'}
       -translate-x-full group-hover:translate-x-0
-      transition-transform duration-200 ease-out
-      z-0
-    "/>
+      transition-transform duration-200 ease-out z-0
+    `}/>
     {/* Text flips color as fill slides in */}
-    <span className="relative 
-                      z-10 
-                      group-hover:text-black 
-                      transition-colors 
-                      duration-200">
+     <span className={`relative z-10 transition-colors duration-200 vintage-font text-2xl
+    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>
       Lets Connect
     </span>
   </button>
@@ -102,8 +100,8 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
     group relative overflow-hidden
     px-5 py-2
     border border-white/40 hover:border-white
-    bg-[#FAF3E1] hover:bg-#000000/0
-    text-black hover:text-white
+    bg-[#FF3831] hover:bg-#000000/0
+    text-[#fffdd0] hover:text-white
     outline-none appearance-none
     cursor-pointer
     transition-all duration-200
@@ -112,13 +110,13 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
     {/* White fill that slides in from left */}
         <span className={`
       absolute inset-0
-      ${isXRayActive ? 'bg-emerald-400' : 'bg-[#FF3831]'}
+      ${isXRayActive ? 'bg-emerald-400' : 'bg-[#fffdc9]'}
       -translate-x-full group-hover:translate-x-0
       transition-transform duration-200 ease-out z-0
     `}/>
     {/* Text flips color as fill slides in */}
-    <span className={`relative z-10 transition-colors duration-200
-    ${isXRayActive ? 'group-hover:text-white' : 'group-hover:text-[#FAF3E1]'}`}>
+    <span className={`relative z-10 transition-colors duration-200 text-2xl
+    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>
       Menu
     </span>
   </button>
