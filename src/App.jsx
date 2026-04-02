@@ -83,10 +83,10 @@ function App() {
     <div id="home" className="max-w-7xl mx-auto px-6">  {/* ← keep open */}
       <Home />
     </div>
-     <div id="Projects" className="max-w-7xl mx-auto px-6">
+     <div id="Projects" className="max-w-7xl mx-auto px-6 min-h-screen">
     <ProjectsSection />  {/* ← no space after < */}
      </div>
-    <div id="contact" className="h-screen bg-[#121212] flex items-center justify-center">
+    <div id="contact" className="bg-[#121212] flex items-center justify-center">
       <Contact />
     </div>
 

@@ -5,6 +5,7 @@ export default function CyclingText({
   interval = 2500,
   className = '',
   wrapperClassName = '',
+  direction = 'up',
 }) {
   const [current, setCurrent] = useState(0);
   const [next, setNext] = useState(1);
@@ -13,6 +14,8 @@ export default function CyclingText({
   const wrapperRef = useRef(null);
   const currentSpanRef = useRef(null);
   const nextSpanRef = useRef(null);
+  const exitY   = direction === 'up' ? '-115%' : '115%';  // current slides this way out
+  const enterY  = direction === 'up' ? '115%'  : '-115%'; // next comes from this direction
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -76,7 +79,7 @@ export default function CyclingText({
           display: 'inline-block',
           whiteSpace: 'nowrap',
           padding: '0.1em 0',
-          transform: phase === 'switching' ? 'translateY(-115%)' : 'translateY(0%)',
+          transform: phase === 'switching' ? `translateY(${exitY})` : 'translateY(0%)',
           opacity: phase === 'switching' ? 0 : 1,
           transition: phase === 'reset' ? 'none' : t,
           position: phase === 'switching' ? 'absolute' : 'relative',
@@ -93,7 +96,7 @@ export default function CyclingText({
           display: 'inline-block',
           whiteSpace: 'nowrap',
           padding: '0.1em 0',
-          transform: phase === 'switching' ? 'translateY(0%)' : 'translateY(115%)',
+          transform: phase === 'switching' ? 'translateY(0%)' : `translateY(${enterY})`,
           opacity: phase === 'switching' ? 1 : 0,
           transition: phase === 'reset' ? 'none' : t,
           position: phase === 'switching' ? 'relative' : 'absolute',

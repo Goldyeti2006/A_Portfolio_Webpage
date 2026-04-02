@@ -68,7 +68,7 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
                     isolate">
   
   {/* Contact - boxed with slide fill */}
-  <button onClick={() => {}} className="
+  <button onClick={() => handleNavClick('#contact')} className="
           group relative overflow-hidden
           px-5 py-2
           border border-white/40 hover:border-white
@@ -147,7 +147,7 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
             </button></li>
             <li><Link to="/model" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">3D Archive</Link></li>
             <li><button 
-              onClick={() => handleNavClick('#projects')} 
+              onClick={() => handleNavClick('#Projects')} 
               className="text-2xl hover:text-emerald-400 transition-colors tracking-widest"
             >
               Projects

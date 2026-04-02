@@ -81,25 +81,25 @@ export default function HeroReveal({ isXRayActive }) {
         {/* PANEL A: Raw Page Source Code */}
         <div className="absolute top-10 right-10 opacity-20 font-mono text-[10px] md:text-xs text-gray-400 max-w-sm overflow-hidden select-none">
           <pre>{`
-import { useState, useEffect } from 'react';
-import gsap from 'gsap';
+        import { useState, useEffect } from 'react';
+        import gsap from 'gsap';
 
-export default function SecurityCore() {
-  const interceptTraffic = (req, res) => {
-    if (req.headers['x-forwarded-for']) {
-      blockIP(req.ip);
-      return res.status(403).send('Forbidden');
-    }
-  };
-  
-  // Initialize defense grid
-  useEffect(() => {
-    system.arm();
-  }, []);
-}
+        export default function SecurityCore() {
+          const interceptTraffic = (req, res) => {
+            if (req.headers['x-forwarded-for']) {
+              blockIP(req.ip);
+              return res.status(403).send('Forbidden');
+            }
+          };
+          
+          // Initialize defense grid
+          useEffect(() => {
+            system.arm();
+          }, []);
+        }
           `}</pre>
         </div>
-
+        <div className="absolute bottom-10 left-10 opacity-20 font-mono text-[10px] md:text-xs text-gray-400 max-w-sm overflow-hidden select-none">01010100 01101000 01100101 01110010 01100101 00100000 01100001 01110010 01100101 00100000 01101101 01110101 01101100 01110100 01101001 01110000 01101100 01100101 00100000 01100101 01100001 01110011 01110100 01100101 01110010 00100000 01100101 01100111 01100111 01110011 00100000 01100110 01101111 01110010 00100000 01110101 00100000 01100001 01101100 01101111 01101110 01100111 00100000 01110100 01101000 01100101 00100000 01110111 01100001 01111001</div>
         {/* PANEL B: Static Nmap Scan */}
         <div className="absolute top-1/3 left-10 md:left-32 font-mono text-emerald-400">
           <h2 className="text-xl md:text-3xl font-bold text-white mb-2">root@goldyeti:~# nmap -sV -p- target.local</h2>
@@ -133,8 +133,30 @@ export default function SecurityCore() {
         className="absolute inset-0 flex flex-col items-center justify-center bg-[#FAF3E1] text-slate-900 p-10 z-10 pointer-events-none transition-all duration-700"
         style={getMaskStyle()}
       >
+       <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20">
+          <span 
+            className="text-[12px] md:text-[16px] tracking-widest uppercase font-mono text-gray-500"
+            style={{ 
+              writingMode: 'vertical-rl',
+              textOrientation: 'upright'
+            }}
+          >
+            D I S C I P L I N E
+          </span>
+        </div>
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20">
+          <span 
+            className="text-[12px] md:text-[16px] tracking-widest uppercase font-mono text-gray-500"
+            style={{ 
+              writingMode: 'vertical-rl',
+              textOrientation: 'upright'
+            }}
+          >
+            O B S E S S I O N
+          </span>
+        </div>
          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight mb-4 text-center">
-            Securely designed <br/> Creatively hardened.
+            Securely Designed <br/><h1 className='text-[#FF3831] text-4xl md:text-6xl'> & </h1> Creatively Hardened.
          </h1>
          <p className="text-xl md:text-2xl font-light text-center max-w-2xl text-gray-600">
             Clean interfaces masking impenetrable architecture.

@@ -5,8 +5,6 @@ import ESP32ProjectSection from './ESP32ProjectSection';
 import './index.css';
 import HoverPopup from './HoverPopup';
 import CyclingText from './CyclingText';
-import './index.css';
-
 export default function ProjectsSection() {
   const [popup, setPopup] = useState(null);
   const lastPopupRef = useRef(null); // ← retains last data during exit
@@ -35,9 +33,12 @@ export default function ProjectsSection() {
   return (
     <div className="text-left p-6 text-[#fffdd0]">
         <div className="h-20 mt-4 flex text-6xl items-center justify-center text-[#FF3831]">~~~~~</div>
-        <div className="text-4xl md:text-5xl font-bold mb-12">
-          <CyclingText words={['Projects' , 'Experiences']}  className="text-6xl font-bold text-center text-[#FF3831]"/> <div> I've</div><CyclingText words={[' built',' developed']}  className="text-6xl font-bold text-center"/></div>
+        <div className="text-4xl md:text-5xl font-bold mb-12 flex items-center justify-center gap-3">
+          <CyclingText words={['Projects' , 'Experiences' , 'lessons']}  className="text-6xl font-bold text-center text-[#FF3831]" direction='up'/>
+           <span className="shrink-0 whitespace-nowrap text-6xl font-bold"> I've</span>
+           <CyclingText words={[' built',' developed', 'learned']}  className="text-6xl font-bold text-center" direction='down'/></div>
        <ProjectFolder
+  
         title="ESP32 Hardware Analysis"
         titleColor="#fffdd0"
         preview={makePreview({ 
@@ -58,7 +59,25 @@ export default function ProjectsSection() {
           image: 'Feather.jpg', 
         })}
       >
-        <div>...</div>
+        <div className="space-y-4">
+    <p>Feather is a minimal browser built for speed and privacy...</p>
+    <p>Key features include:</p>
+    <ul className="list-disc pl-5">
+      <li>No tracking</li>
+      <li>Built-in ad blocking</li>
+      <li>Minimal memory footprint</li>
+    </ul>
+    
+    {/* Video right here - part of Feather's content */}
+    <video width="100%" 
+    preload="metadata" 
+    className="rounded-lg mt-4"
+    autoPlay 
+    muted 
+    loop >
+      <source src="/feather.mp4" type="video/mp4" />
+    </video>
+  </div>
       </ProjectFolder>
 
       {createPortal(
