@@ -8,6 +8,22 @@ import './app.css';
 export default function Contact() {
   const handleSubmit = (e) => {
   e.preventDefault()
+  const name = formRef.current.name.value.trim()
+  const email = formRef.current.email.value.trim()
+  const message = formRef.current.message.value.trim()
+  
+  // Layer 3: Extra checks
+  if (!name || !email || !message) {
+    setStatus('error')
+    return
+  }
+  
+  // Extra email check (browser type="email" already does this, but double-check)
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailPattern.test(email)) {
+    setStatus('error')
+    return
+  }
   setStatus('sending')
 
   emailjs.sendForm(
@@ -72,7 +88,11 @@ export default function Contact() {
           {status === 'idle' && 'Send Message'}
           {status === 'sending' && 'Sending...'}
           {status === 'sent' && '✓ Sent!'}
-          {status === 'error' && '✗ Error'}
+          {status === 'error' && (
+          <p className="text-red-500 text-sm mt-2">
+            Please fill all fields with valid information.
+          </p>
+        )}
         </span>
     </button>
         </div>

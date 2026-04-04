@@ -42,43 +42,156 @@ export default function ProjectsSection() {
         title="ESP32 Hardware Analysis"
         titleColor="#fffdd0"
         preview={makePreview({ 
-          color: '#1a1a2e', 
+          color: '#7171ff', 
           tag: 'An Evil Twin Simulation', 
           image: 'Esp32.webp', 
         })}
-      >
+      > <div className="px-4 py-6 border border-white/20 gap-8">
         <ESP32ProjectSection />
+        </div>
       </ProjectFolder>
-
       <ProjectFolder
         title="Project Feather"
         preview={makePreview({ 
-          color: '#FF3831', 
+          color: '#fc6100', 
           tag: 'A Lightweight Browser', 
           tagColor: '#222222',
           image: 'Feather.jpg', 
         })}
       >
-        <div className="space-y-4">
-    <p>Feather is a minimal browser built for speed and privacy...</p>
-    <p>Key features include:</p>
-    <ul className="list-disc pl-5">
-      <li>No tracking</li>
-      <li>Built-in ad blocking</li>
-      <li>Minimal memory footprint</li>
-    </ul>
-    
-    {/* Video right here - part of Feather's content */}
-    <video width="100%" 
-    preload="metadata" 
-    className="rounded-lg mt-4"
-    autoPlay 
-    muted 
-    loop >
-      <source src="/feather.mp4" type="video/mp4" />
-    </video>
-  </div>
+        <div className="flex flex-col md:flex-row items-start px-4 py-6 border border-white/20 gap-8">
+        <div className="w-full md:w-1/2 text-white">
+        <h3 className="text-2xl font-bold mb-2">Feather: Privacy-First Minimal Browser</h3>
+
+        <p className="project-pitch mb-4">
+          <strong>Feather: High-Efficiency Rust Browser</strong><br />
+          Memory-First Web Architecture
+          A lightweight web browser built from the ground up in Rust, designed to eliminate "RAM bloat" through aggressive state serialization and intelligent tab hibernation.
+        </p>
+
+        <div className="project-section mb-4">
+          <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Tech Stack</h4>
+          <ul className="list-disc pl-5">
+            <li><strong>Core Engine:</strong>Rust, Servo (WebRender), Winit</li>
+            <li><strong>Memory Management:</strong>Custom LRU (Least Recently Used) Hibernation Logic</li>
+            <li><strong>Frontend</strong> Slint UI</li>
+            <li><strong>Parallelism:</strong> Rayon for multi-threaded CSS styling and layout</li>
+          </ul>
+        </div>
+
+        <div className="project-section mb-4">
+          <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Key Features</h4>
+          <ul className="list-disc pl-5">
+            <li><strong>Zero-Cost Hibernation:</strong>Automatically serializes inactive tab states to disk, reducing idle memory footprint by up to 90%.</li>
+            <li><strong>Ownership-Based Safety:</strong>Leverages Rust`s borrow checker to eliminate memory leaks and dangling pointers common in C++ browsers.</li>
+            <li><strong>Aggressive Reclamation:</strong> A custom "Garbage Collector" for the UI that drops unused assets the millisecond focus shifts, keeping the system "Feather" light.</li>
+            <li><strong>Instant-Snap Awakening: </strong>Optimized binary deserialization that brings hibernated tabs back to a fully interactive state in under 200ms.</li>
+          </ul>
+        </div>
+
+        <p className="project-concepts mb-4 text-sm text-gray-300">
+          <strong>Concepts Mastered:</strong>Systems Programming in Rust, RAII (Resource Acquisition Is Initialization), Asynchronous I/O, and Desktop Lifecycle Management
+        </p>
+
+        </div>
+        <div className="bg-white/20 w-1/2 my-4">
+        {/* Video right here - part of Feather's content */}
+        <video width="100%" 
+        preload="metadata" 
+        className="rounded-lg"
+        autoPlay 
+        muted 
+        loop >
+          <source src="/feather.mp4" type="video/mp4" />
+        </video>
+        </div>
+      </div>
       </ProjectFolder>
+      <ProjectFolder
+  title="Project Diomede"
+  preview={makePreview({ 
+    color: '#0ea5e9', // A clean, medical/tech blue
+    tag: '3D Medical Viewer', 
+    tagColor: '#ffffff',
+    image: 'Diomede-Cover.jpg', // Replace with your screenshot
+  })}
+>
+  <div className="flex flex-col md:flex-row items-start px-4 py-6 border border-white/20 gap-8">
+    
+    {/* LEFT SIDE: TEXT & LINKS */}
+    <div className="w-full md:w-1/2 text-white">
+      <h3 className="text-2xl font-bold mb-2">Diomede: 3D DICOM Ecosystem</h3>
+
+      <p className="project-pitch mb-4">
+        <strong>Zero-Footprint Medical Imaging</strong><br />
+        A high-performance web application engineered to render heavy 3D volumetric medical scans (CT/MRI) directly in the browser. Built as a Proof of Concept for Google Summer of Code 2026, it eliminates UI freezing through a strictly decoupled Python ingestion pipeline.
+      </p>
+
+      <div className="project-section mb-4">
+        <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Tech Stack</h4>
+        <ul className="list-disc pl-5">
+          <li><strong>Frontend:</strong> React, Tailwind CSS, Web Workers</li>
+          <li><strong>3D Rendering:</strong> Three.js (WebGL), Cornerstone.js</li>
+          <li><strong>Backend & Data:</strong> Python (Flask), PostgreSQL, pydicom</li>
+          <li><strong>Security:</strong> Google OAuth 2.0, JWT Session State</li>
+        </ul>
+      </div>
+
+      <div className="project-section mb-4">
+        <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Key Features</h4>
+        <ul className="list-disc pl-5">
+          <li><strong>Volumetric Raycasting:</strong> Extrudes 2D DICOM slices into fully manipulatable 3D WebGL models natively in the browser.</li>
+          <li><strong>Decoupled Ingestion:</strong> An asynchronous Python worker pre-processes gigabytes of binary medical data to prevent main-thread blocking.</li>
+          <li><strong>Aggressive Optimization:</strong> Utilizes dynamic imports and route-based code splitting to keep the initial JS payload under 400kB.</li>
+        </ul>
+      </div>
+
+      <p className="project-concepts mb-6 text-sm text-gray-300">
+        <strong>Concepts Mastered:</strong> WebGL Context Management, Medical Metadata Parsing, Full-Stack Architecture, and Secure Authentication Flows.
+      </p>
+
+      {/* CALL TO ACTION BUTTONS (The "Attractive" Addition) */}
+      <div className="flex flex-wrap gap-4 mt-auto">
+        <a 
+          href="https://your-vercel-link-here.vercel.app" 
+          target="_blank" 
+          rel="noreferrer" 
+          className="px-5 py-2.5 bg-[#0ea5e9] hover:bg-[#0284c7] text-white rounded-lg transition-colors font-semibold flex items-center gap-2 shadow-lg shadow-blue-500/20"
+        >
+          <span>🌐</span> Live Demo
+        </a>
+        <a 
+          href="https://github.com/Goldyeti2006/your-repo-name" 
+          target="_blank" 
+          rel="noreferrer" 
+          className="px-5 py-2.5 bg-gray-800 border border-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors font-semibold flex items-center gap-2"
+        >
+          <span>💻</span> Source Code
+        </a>
+      </div>
+    </div>
+
+    {/* RIGHT SIDE: MEDIA / VIDEO */}
+    <div className="w-full md:w-1/2 my-4">
+      {/* Added a subtle glassmorphism border to make the video pop */}
+      <div className="bg-white/5 border border-white/10 p-2 rounded-xl shadow-2xl">
+        <video 
+          width="100%" 
+          preload="metadata" 
+          className="rounded-lg object-cover"
+          autoPlay 
+          muted 
+          loop 
+        >
+          {/* Record a quick screen capture of you panning/zooming the 3D skull and drop it here */}
+          <source src="/diomede-demo.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+    
+  </div>
+</ProjectFolder>
+
 
       {createPortal(
         <div
