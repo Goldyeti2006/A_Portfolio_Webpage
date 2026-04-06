@@ -28,7 +28,7 @@ export default function ProjectFolder({ title, children, preview }) {
         onMouseEnter={!isOpen ? preview?.onEnter : undefined}
         onMouseMove={!isOpen ? preview?.onMove : undefined}
         onMouseLeave={!isOpen ? preview?.onLeave : undefined}
-      > <div className='padding'>
+      > <div>
         <h3 className="text-3xl md:text-4xl font-bold text-[#fffdd0] group-hover:text-[#FF3831] transition-colors duration-300">
           {title}
         </h3>

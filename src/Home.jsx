@@ -2,7 +2,10 @@ import CyclingText from "./CyclingText";
 import './App.css';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageTransition from "./PageTransition";
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import EyeballModel from "./EyeballModel.jsx";
+
+
 export default function Home() {
   const navigate = useNavigate();
   const handleNavClick = (targetId) => {
@@ -23,20 +26,22 @@ export default function Home() {
   return (
     
     <div className="min-h-screen flex flex-col justify-center py-20">
-      <div className="mb-2 flex justify-center">
+      <div className="flex justify-center">
       <div className="w-64">  {/* Fixed width large enough for longest word */}
         <CyclingText 
           words={['Greetings', 'ご挨拶', 'Grüße', 'ನಮಸ್ತೆ', 'Salutations']} 
-          className="text-5xl font-bold text-center" 
+          className="text-7xl font-bold text-center" 
           direction="up"
         />
       </div>
       </div>
+      <div className="flex flex-row justify-center items-center">
+        <div className="w-1/2">
       {/* Decorative */}
-      <div className="text-[#FF3831] text-2xl mb-6">//</div>
+      <div className="text-[#FF3831] text-2xl">//</div>
       
       {/* Greeting */}
-      <div className="flex items-baseline gap-4 mb-4">
+      <div className="flex flex-row items-baseline mb-4">
       <p className="text-[#FF3831] font-mono text-lg mb-4">I'm</p>
       
       {/* Name */}
@@ -46,7 +51,7 @@ export default function Home() {
       </div>
       {/* Tagline */}
       <p className="text-xl md:text-2xl text-gray-400 mb-6">
-        Full-stack Developer <span className="text-[#FF3831]">|</span> Security Enthusiast
+        Full-stack Developer <span className="text-[#FF3831]">|</span> Cyber-Security Enthusiast
       </p>
       
       {/* Bio */}
@@ -57,7 +62,7 @@ export default function Home() {
       
       {/* Skills inline */}
       <div className="flex flex-wrap gap-3 mb-10">
-        {['React', 'Three.js', 'ESP32', 'Tailwind', 'Flutter'].map(skill => (
+        {['React', 'Three.js', 'ESP32', 'Tailwind', 'Flutter','Dart','C++','Linux','Python','PostgreSQL'].map(skill => (
           <span key={skill} className="px-3 py-1 border border-[#FF3831]/30 text-[#FF3831] text-sm rounded-full">
             {skill}
           </span>
@@ -88,7 +93,16 @@ export default function Home() {
         <span className={`relative z-10 transition-colors duration-200 text-2xl
           group-hover:text-[#FF3831]`}>Explore My Work →</span>
       </button>
-       
+       </div>
+       <div className="w-1/2 h-[500px]">
+       <Canvas camera={{position:[0,0,4], fav: 50}}>
+          {/* Matches your Ambient Light setup */}
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[5, 5, 5]} />
+          <EyeballModel />
+        </Canvas>
+       </div>
+       </div>
     </div>
   )
 }

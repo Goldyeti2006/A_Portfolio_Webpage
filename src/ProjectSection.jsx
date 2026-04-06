@@ -33,7 +33,7 @@ export default function ProjectsSection() {
   return (
     <div className="text-left p-6 text-[#fffdd0]">
         <div className="h-20 mt-4 flex text-6xl items-center justify-center text-[#FF3831]">~~~~~</div>
-        <div className="text-4xl md:text-5xl font-bold mb-12 flex items-center justify-center gap-3">
+        <div className="text-4xl md:text-5xl font-bold mb-12 flex flex-col md:flex-row items-center justify-center gap-3">
           <CyclingText words={['Projects' , 'Experiences' , 'lessons']}  className="text-6xl font-bold text-center text-[#FF3831]" direction='up'/>
            <span className="shrink-0 whitespace-nowrap text-6xl font-bold"> I've</span>
            <CyclingText words={[' built',' developed', 'learned']}  className="text-6xl font-bold text-center" direction='down'/></div>
@@ -92,9 +92,28 @@ export default function ProjectsSection() {
         <p className="project-concepts mb-4 text-sm text-gray-300">
           <strong>Concepts Mastered:</strong>Systems Programming in Rust, RAII (Resource Acquisition Is Initialization), Asynchronous I/O, and Desktop Lifecycle Management
         </p>
-
+        <button 
+          onClick={() => window.open("https://github.com/Goldyeti2006/feather", "_blank")}
+          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+          className="px-5 py-2.5 
+          bg-gray-800 
+          border border-gray-600
+           hover:bg-gray-700 
+           text-white rounded-lg 
+           transition-colors 
+           font-semibold 
+           flex items-center 
+           gap-2
+           hover:!translate-x-1 
+           hover:!-translate-y-2 
+           hover:!scale-[1.02] 
+           hover:!shadow-lg 
+           hover:!shadow-[#FF3831]/20"
+        >
+        Source Code
+        </button>
         </div>
-        <div className="bg-white/20 w-1/2 my-4">
+        <div className="bg-white/20 w-full md:w-1/2 my-4">
         {/* Video right here - part of Feather's content */}
         <video width="100%" 
         preload="metadata" 
@@ -113,7 +132,7 @@ export default function ProjectsSection() {
     color: '#0ea5e9', // A clean, medical/tech blue
     tag: '3D Medical Viewer', 
     tagColor: '#ffffff',
-    image: 'Diomede-Cover.jpg', // Replace with your screenshot
+    image: 'Docom.jpg', // Replace with your screenshot
   })}
 >
   <div className="flex flex-col md:flex-row items-start px-4 py-6 border border-white/20 gap-8">
@@ -152,22 +171,46 @@ export default function ProjectsSection() {
 
       {/* CALL TO ACTION BUTTONS (The "Attractive" Addition) */}
       <div className="flex flex-wrap gap-4 mt-auto">
-        <a 
-          href="https://your-vercel-link-here.vercel.app" 
-          target="_blank" 
-          rel="noreferrer" 
-          className="px-5 py-2.5 bg-[#0ea5e9] hover:bg-[#0284c7] text-white rounded-lg transition-colors font-semibold flex items-center gap-2 shadow-lg shadow-blue-500/20"
+        <button 
+          onClick={() => window.open("https://diomede-viewer.vercel.app/", "_blank")}
+          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+          className="px-5 py-2.5 
+          bg-gray-800 
+          border border-gray-600
+           hover:bg-gray-700 
+           text-white rounded-lg 
+           transition-colors 
+           font-semibold 
+           flex items-center 
+           gap-2
+           hover:!translate-x-1 
+           hover:!-translate-y-2 
+           hover:!scale-[1.02] 
+           hover:!shadow-lg 
+           hover:!shadow-[#FF3831]/20"
         >
-          <span>🌐</span> Live Demo
-        </a>
-        <a 
-          href="https://github.com/Goldyeti2006/your-repo-name" 
-          target="_blank" 
-          rel="noreferrer" 
-          className="px-5 py-2.5 bg-gray-800 border border-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors font-semibold flex items-center gap-2"
+        Visit Site
+        </button>
+        <button 
+          onClick={() => window.open("https://github.com/Goldyeti2006/diomede-viewer", "_blank")}
+          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+          className="px-5 py-2.5 
+          bg-gray-800 
+          border border-gray-600
+           hover:bg-gray-700 
+           text-white rounded-lg 
+           transition-colors 
+           font-semibold 
+           flex items-center 
+           gap-2
+           hover:!translate-x-1 
+           hover:!-translate-y-2 
+           hover:!scale-[1.02] 
+           hover:!shadow-lg 
+           hover:!shadow-[#FF3831]/20"
         >
-          <span>💻</span> Source Code
-        </a>
+        Source Code
+        </button>
       </div>
     </div>
 

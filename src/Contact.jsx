@@ -4,6 +4,7 @@ import.meta.env.VITE_EMAILJS_SERVICE_ID;
 import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 import emailjs from '@emailjs/browser';
 import './app.css';
+import { FaGithub, FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa';
 
 export default function Contact() {
   const handleSubmit = (e) => {
@@ -43,8 +44,43 @@ export default function Contact() {
         <div className="h-16 mt-4 flex text-6xl items-center justify-center text-[#FF3831]">
           ~~~~~
         </div>
-        <div className='flex'>
-        <div className="w-full md:w-1/2 mr-6">hello</div>
+        <div className='flex flex-col md:flex-row gap-8'>
+        <div className="flex-col justify-center w-full md:w-1/2 gap-6 mt-6">
+        <div>
+            {/* Using a placeholder custom font class 'font-gothic' - replace with yours */}
+            <h2 className="text-6xl text-[#FF3333] vintage-font mb-4 tracking-wider">
+              Let's Talk
+            </h2>
+            <p className="text-lg leading-relaxed text-gray-400">
+              Whether you have a question about my projects, want to collaborate on a new app, 
+              or just want to talk about the latest in cybersecurity, feel free to drop a message.
+            </p>
+          </div>
+
+          {/* Direct Contact Info */}
+          <div className="space-y-2 text-gray-300 font-mono">
+             <p>📍 Hubballi, Karnataka</p>
+             <p>✉️ <a href="mailto:sharanprakashrkasbag@example.com" className="hover:text-[#FF3333] transition-colors">sharanprakashrkasbag@example.com</a></p>
+          </div>
+        <div className="flex space-x-6 text-2xl pt-4">
+        <a href="https://github.com/Goldyeti2006" target="_blank" rel="noreferrer"
+          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+          <FaGithub />
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer"
+          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+          <FaLinkedin />
+        </a>
+        <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer"
+          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+          <FaInstagram />
+        </a>
+        <a href="https://discord.gg/yourinvite" target="_blank" rel="noreferrer"
+          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+          <FaDiscord />
+        </a>
+        </div>
+      </div>
         <div className="w-full md:w-1/2 mb-12 gap-3 rounded-lg border border-white/20 px-10 py-10">
         <h2 className="text-5xl md:text-6xl font-bold text-center text-[#FF3831] mt-4 mb-12 vintage-font">
           Contact Me

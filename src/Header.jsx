@@ -70,9 +70,9 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
   {/* Contact - boxed with slide fill */}
   <button onClick={() => handleNavClick('#contact')} className="
           group relative overflow-hidden
-          px-5 py-2
           border border-white/40 hover:border-white
           bg-[#FF3831] hover:bg-#000000/0
+          
           text-[#fffdd0] hover:text-white
           outline-none appearance-none
           cursor-pointer
@@ -86,11 +86,16 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
       -translate-x-full group-hover:translate-x-0
       transition-transform duration-200 ease-out z-0
     `}/>
-    {/* Text flips color as fill slides in */}
-     <span className={`relative z-10 transition-colors duration-200 vintage-font text-2xl
-    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>
-      Lets Connect
-    </span>
+
+
+      {/* Text flips color as fill slides in */}
+     <span className={`relative z-10 transition-colors duration-200 vintage-font text-2xl block sm:hidden
+    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>📱</span>
+    
+    <span className={`relative z-10 transition-colors px-3 py-1 duration-200 vintage-font text-2xl hidden sm:block lg:hidden
+    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>Contact</span>
+    <span className={`relative z-10 transition-colors px-5 py-2 duration-200 vintage-font text-2xl hidden lg:block
+    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>Let's Connect</span>
   </button>
 
   {/* Menu stays as plain text */}
@@ -145,12 +150,17 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
             >
               Home
             </button></li>
-            <li><Link to="/model" onClick={() => setIsSidebarOpen(false)} className="hover:text-emerald-400 transition-colors">3D Archive</Link></li>
             <li><button 
               onClick={() => handleNavClick('#Projects')} 
               className="text-2xl hover:text-emerald-400 transition-colors tracking-widest"
             >
               Projects
+            </button></li>
+            <li><button 
+              onClick={() => handleNavClick('#contact')} 
+              className="text-2xl hover:text-emerald-400 transition-colors tracking-widest"
+            >
+              Contact Me
             </button></li>
           </ul>
 

@@ -17,12 +17,23 @@ import './index.css';
 import ProjectsSection from './ProjectSection';
 gsap.registerPlugin(ScrollTrigger);
 const ModelPage = lazy(() => import('./ModelPage'));
+// In App.jsx
+
 function App() {
   const [isXRayActive, setIsXRayActive] = useState(true);
   const [isLoading, setIsLoading] = useState(true); 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [pendingTarget, setPendingTarget] = useState(null);
   const lenisRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 })
+
+const handleMouseMove = (e) => {
+  const rect = e.currentTarget.getBoundingClientRect()
+  setMousePos({
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  })
+}
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -69,7 +80,7 @@ function App() {
     />
 
     {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-
+    <div onMouseMove={handleMouseMove} className='relative'>
     <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
       <Header 
         isXRayActive={isXRayActive} 
@@ -77,9 +88,8 @@ function App() {
         startTransition={(targetId) => { setIsTransitioning(true); setPendingTarget(targetId); }}
       />
     </div>
-    
-    <HeroReveal isXRayActive={isXRayActive} />
-
+    <HeroReveal isXRayActive={isXRayActive} mousePos={mousePos}/>
+    </div>
     <div id="home" className="max-w-7xl mx-auto px-6">  {/* ← keep open */}
       <Home />
     </div>

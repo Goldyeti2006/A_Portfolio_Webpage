@@ -42,21 +42,8 @@ const LiveTerminal = () => {
 
 // --- MAIN COMPONENT ---
 // Notice we added { isXRayActive } right here:
-export default function HeroReveal({ isXRayActive }) {
-  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 }); // Starts off-screen
+export default function HeroReveal({ isXRayActive, mousePos }) {
   const containerRef = useRef(null);
-  const handleMouseMove = (e) => {
-    if (!isXRayActive || !containerRef.current) return;
-    
-    // 2. Use the Ref to get the container position ONCE per move
-    // This is much faster than getBoundingClientRect()
-    const { left, top } = containerRef.current.getBoundingClientRect();
-    
-    setMousePos({
-      x: e.clientX - left,
-      y: e.clientY - top,
-    });
-  };
 
   // This function decides if the hole punch exists or not
   const getMaskStyle = () => {
@@ -71,7 +58,6 @@ export default function HeroReveal({ isXRayActive }) {
   return (
     <div ref={containerRef} // 3. Attach the ref here
       className="relative w-full h-screen overflow-hidden cursor-crosshair bg-[#0a0a0a]"
-      onMouseMove={handleMouseMove}
     >
       {/* =========================================
           LAYER 1: THE SECURITY BACKEND (Dark) 
@@ -135,7 +121,7 @@ export default function HeroReveal({ isXRayActive }) {
       >
        <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20">
           <span 
-            className="text-[12px] md:text-[16px] tracking-widest uppercase font-mono text-gray-500"
+            className="text-[8px] md:text-[12px] tracking-widest uppercase font-mono text-gray-500"
             style={{ 
               writingMode: 'vertical-rl',
               textOrientation: 'upright'
@@ -146,7 +132,7 @@ export default function HeroReveal({ isXRayActive }) {
         </div>
         <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20">
           <span 
-            className="text-[12px] md:text-[16px] tracking-widest uppercase font-mono text-gray-500"
+            className="text-[8px] md:text-[12px] tracking-widest uppercase font-mono text-gray-500"
             style={{ 
               writingMode: 'vertical-rl',
               textOrientation: 'upright'
@@ -156,7 +142,7 @@ export default function HeroReveal({ isXRayActive }) {
           </span>
         </div>
          <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight mb-4 text-center">
-            Securely Designed <br/><h1 className='text-[#FF3831] text-4xl md:text-6xl'> & </h1> Creatively Hardened.
+            Securely Designed <br/><p className='text-[#FF3831] text-4xl md:text-6xl'> & </p> Creatively Hardened.
          </h1>
          <p className="text-xl md:text-2xl font-light text-center max-w-2xl text-gray-600">
             Clean interfaces masking impenetrable architecture.
