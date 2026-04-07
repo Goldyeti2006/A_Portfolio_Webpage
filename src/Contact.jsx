@@ -3,7 +3,7 @@ import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 import.meta.env.VITE_EMAILJS_SERVICE_ID;
 import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 import emailjs from '@emailjs/browser';
-import './app.css';
+import './App.css';
 import { FaGithub, FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa';
 
 export default function Contact() {
@@ -143,3 +143,4 @@ export default function Contact() {
     </section>
   );
 }
+// git not seeing this file for some reason

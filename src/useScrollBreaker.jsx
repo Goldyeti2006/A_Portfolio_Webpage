@@ -64,3 +64,4 @@ export function useScrollBreaker(lenisRef, sectionIds, pauseDuration = 200) {
     return () => { clearInterval(interval); cleanup?.(); };
   }, []);
 }
+// this
