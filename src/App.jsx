@@ -55,10 +55,19 @@ const handleMouseMove = (e) => {
     };
   }, []);
   useEffect(() => {
+  // 1. Calculate the threshold ONCE when the app first loads
+  const fixedHeroHeight = window.innerHeight;
+  const threshold = fixedHeroHeight * 0.8;
+
   const handleScroll = () => {
-    const heroHeight = window.innerHeight; // hero is 100vh
-    if (window.scrollY > heroHeight * 0.8) { // 80% past hero
+    const currentScroll = window.scrollY;
+
+    // 2. Use the stable threshold to completely stop the rapid flipping
+    if (currentScroll > threshold) {
       setIsXRayActive(false);
+      setCanToggleXRay(false); 
+    } else {
+      setCanToggleXRay(true); 
     }
   };
 
@@ -124,7 +133,7 @@ useEffect(() => {
     />
 
     {/* 3. THE HERO: Stays sticky in the background. */}
-    <div className='sticky top-0 h-screen z-0'>
+    <div className='sticky top-0 h-[100dvh] z-0'>
        <HeroReveal isXRayActive={isXRayActive} mousePos={mousePos} />
     </div>
     <div id="home" className="relative z-10 max-w-7xl bg-[#121212] max-w-[90%] mx-auto px-6" style={{ marginTop: '100vh' }}>  {/* ← keep open */}
