@@ -1,43 +1,48 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-export default function PageTransition({ isTriggered,  onCover, onComplete }) {
+export default function PageTransition({ isTriggered, onCover, onComplete }) {
   const containerRef = useRef(null);
   const pathRef = useRef(null);
+  
+  // 1. MAGIC FIX: Store the functions in a ref so they update silently 
+  // without triggering the GSAP useEffect to restart.
+  const callbacks = useRef({ onCover, onComplete });
+  
+  useEffect(() => {
+    callbacks.current = { onCover, onComplete };
+  }, [onCover, onComplete]);
 
   useEffect(() => {
-  if (!isTriggered) return;
+    if (!isTriggered) return;
 
-  const tl = gsap.timeline({ onComplete });
+    let ctx = gsap.context(() => {
+      
+      const tl = gsap.timeline({ 
+        // 2. Call the ref version of onComplete
+        onComplete: () => callbacks.current.onComplete?.() 
+      });
 
-  // ALL frames: M x y  L x y  L x y  Q cx cy x y  Z
-  // (0,0)=top-left  (100,0)=top-right
-  // (0,100)=bottom-left  (100,100)=bottom-right
+      // 3. Added 'opacity: 1' here to guarantee it never gets stuck invisible
+      tl.set(containerRef.current, { display: 'block', opacity: 1 })
 
-tl.set(containerRef.current, { display: 'block' })
+        .fromTo(pathRef.current,
+          { attr: { d: 'M -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 Z' } },
+          { attr: { d: 'M -10 -10 C 50 -60 50 -60 110 -10 C 160 50 160 50 110 110 C 50 160 50 160 -10 110 C -60 50 -60 50 -10 -10 Z' },
+            duration: 1.4, ease: 'power3.inOut' }
+        )
 
-  .fromTo(pathRef.current,
-    // Collapsed — all at BL corner (outside viewBox so no flash)
-    { attr: { d: 'M -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 C -10 110 -10 110 -10 110 Z' } },
+        // 4. Call the ref version of onCover
+        .call(() => callbacks.current.onCover?.())
 
-    // Corners as anchors, edges bow outward — guaranteed full coverage
-    { attr: { d: 'M -10 -10 C 50 -60 50 -60 110 -10 C 160 50 160 50 110 110 C 50 160 50 160 -10 110 C -60 50 -60 50 -10 -10 Z' },
-      duration: 1.4, ease: 'power3.inOut' }
-  )
+        .to(pathRef.current, { duration: 0.15 })
+        .to(containerRef.current, { duration: 0.6, opacity: 0 })
+        .set(containerRef.current, { display: 'none', opacity: 1 });
+    });
 
-  .to(pathRef.current,
-    { attr: { d: 'M -10 -10 C 50 -60 50 -60 110 -10 C 160 50 160 50 110 110 C 50 160 50 160 -10 110 C -60 50 -60 50 -10 -10 Z' },
-      duration: 0.15, ease: 'none' }
-  )
-
-  .to(containerRef.current, {
-    duration: 0.6,
-    onComplete: () => onCover?.()
-  })
-
-  .set(containerRef.current, { display: 'none' })
-  .call(() => onComplete());
-}, [isTriggered, onComplete]);
+    return () => ctx.revert(); 
+    
+  }, [isTriggered]); // 5. CRITICAL: Removed onCover and onComplete from this array!
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[300] hidden pointer-events-none">

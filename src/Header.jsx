@@ -8,18 +8,9 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
   const location = useLocation();
   const handleNavClick = (targetId) => {
     setIsSidebarOpen(false); 
-    // FIX: Only call this once with the targetId
-    startTransition(targetId); 
     
-    setTimeout(() => {
-      const target = document.querySelector(targetId);
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop,
-          behavior: 'instant' 
-        });
-      }
-    }, 1200); 
+    // ONLY call this. Do not use setTimeout here.
+    startTransition(targetId); 
   };
   const getPageName = () => {
     if (location.pathname === '/') return 'HOME';

@@ -63,7 +63,7 @@ export default function Contact() {
              <p>✉️ <a href="mailto:sharanprakashrkasbag@gmail.com" className="hover:text-[#FF3333] transition-colors">sharanprakashrkasbag@gmail.com</a></p>
           </div>
           <div className="mt-6 py-5 text-center"></div>
-        <div className="flex space-x-6 justify-center flex-row justify-between text-2xl pt-4">
+        <div className="flex space-x-6 justify-center flex-row justify-between text-2xl px-6 pt-4">
         <a href="https://github.com/Goldyeti2006" target="_blank" rel="noreferrer"
           className="text-5xl text-[#fffdd0] hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
           <FaGithub />

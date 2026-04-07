@@ -94,8 +94,25 @@ useEffect(() => {
     {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
    <PageTransition 
       isTriggered={isTransitioning} 
-      onCover={() => { /* ... scroll logic ... */ }}
-      onComplete={() => setIsTransitioning(false)} 
+      
+      // 1. When the screen is fully black, THIS runs to instantly jump the page
+      onCover={() => {
+        if (pendingTarget) {
+          const target = document.querySelector(pendingTarget);
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop,
+              behavior: 'instant' 
+            });
+          }
+        }
+      }}
+      
+      // 2. When the animation finishes, reset the states
+      onComplete={() => {
+        setIsTransitioning(false);
+        setPendingTarget(null);
+      }} 
     />
     {/* 2. THE HEADER: Now outside the sticky div. It gets mousePos and stays on top. */}
     <Header 
