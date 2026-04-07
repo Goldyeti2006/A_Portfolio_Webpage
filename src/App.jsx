@@ -128,7 +128,10 @@ useEffect(() => {
        <HeroReveal isXRayActive={isXRayActive} mousePos={mousePos} />
     </div>
     <div id="home" className="relative z-10 max-w-7xl bg-[#121212] max-w-[90%] mx-auto px-6" style={{ marginTop: '100vh' }}>  {/* ← keep open */}
-      <Home />
+      <Home startTransition={(targetId) => { 
+        setIsTransitioning(true); 
+        setPendingTarget(targetId); 
+      }}/>
     </div>
     <div id="about" className="relative z-10 bg-[#121212] max-w-[90%] mx-auto px-6 min-h-screen">
       <AboutMe />
