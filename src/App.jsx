@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense, lazy, useRef } from 'react';
+import { useEffect, useState, lazy, useRef, useCallback } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
@@ -14,7 +14,9 @@ import PageTransition from './PageTransition';
 import { useScrollBreaker } from './useScrollBreaker';
 import CyclingText from './CyclingText';
 import './index.css';
+import AboutMe from './Aboutme';
 import ProjectsSection from './ProjectSection';
+import Marquee from './marquee';
 gsap.registerPlugin(ScrollTrigger);
 const ModelPage = lazy(() => import('./ModelPage'));
 // In App.jsx
@@ -26,13 +28,14 @@ function App() {
   const [pendingTarget, setPendingTarget] = useState(null);
   const lenisRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 })
-
+  const handleLoadingComplete = useCallback(() => {
+  setIsLoading(false);
+}, []);
 const handleMouseMove = (e) => {
-  const rect = e.currentTarget.getBoundingClientRect()
   setMousePos({
-    x: e.clientX - rect.left,
-    y: e.clientY - rect.top
-  })
+    x: e.clientX,
+    y: e.clientY
+  });
 }
   useEffect(() => {
     const lenis = new Lenis({
@@ -62,41 +65,62 @@ const handleMouseMove = (e) => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   return () => window.removeEventListener('scroll', handleScroll);
 }, []);
-  useScrollBreaker(lenisRef, ['home', 'Projects', 'contact'], 380);
+const [canToggleXRay, setCanToggleXRay] = useState(true);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const heroHeight = window.innerHeight;
+    const currentScroll = window.scrollY;
+
+    // 1. Auto-disable X-Ray when scrolling past hero
+    if (currentScroll > heroHeight * 0.8) {
+      setIsXRayActive(false);
+      setCanToggleXRay(false); // Lock the button
+    } else {
+      setCanToggleXRay(true); // Unlock when back at the top
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+  useScrollBreaker(lenisRef, ['home', 'about', 'Projects', 'contact'], 800);
 
   return (
-  <div className="relative w-full no-scrollbar">
-    
-    <PageTransition 
+ <div 
+    onMouseMove={handleMouseMove} 
+    className="relative w-full no-scrollbar"
+  >
+    {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
+   <PageTransition 
       isTriggered={isTransitioning} 
-      onCover={() => {
-        if (pendingTarget) {
-          const el = document.querySelector(pendingTarget);
-          if (el) window.scrollTo({ top: el.offsetTop, behavior: 'instant' });
-          setPendingTarget(null);
-        }
-      }}
+      onCover={() => { /* ... scroll logic ... */ }}
       onComplete={() => setIsTransitioning(false)} 
     />
+    {/* 2. THE HEADER: Now outside the sticky div. It gets mousePos and stays on top. */}
+    <Header 
+      isXRayActive={isXRayActive} 
+      toggleXRay={() => setIsXRayActive(!isXRayActive)} 
+      startTransition={(targetId) => { setIsTransitioning(true); setPendingTarget(targetId); }}
+      isLoading={isLoading} 
+      mousePos={mousePos} // Header gets the mousePos here
+    />
 
-    {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-    <div onMouseMove={handleMouseMove} className='relative'>
-    <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-      <Header 
-        isXRayActive={isXRayActive} 
-        toggleXRay={() => setIsXRayActive(!isXRayActive)} 
-        startTransition={(targetId) => { setIsTransitioning(true); setPendingTarget(targetId); }}
-      />
+    {/* 3. THE HERO: Stays sticky in the background. */}
+    <div className='sticky top-0 h-screen z-0'>
+       <HeroReveal isXRayActive={isXRayActive} mousePos={mousePos} />
     </div>
-    <HeroReveal isXRayActive={isXRayActive} mousePos={mousePos}/>
-    </div>
-    <div id="home" className="max-w-7xl mx-auto px-6">  {/* ← keep open */}
+    <div id="home" className="relative z-10 max-w-7xl bg-[#121212] max-w-[90%] mx-auto px-6" style={{ marginTop: '100vh' }}>  {/* ← keep open */}
       <Home />
     </div>
-     <div id="Projects" className="max-w-7xl mx-auto px-6 min-h-screen">
+    <div id="about" className="relative z-10 bg-[#121212] max-w-[90%] mx-auto px-6 min-h-screen">
+      <AboutMe />
+    </div>
+     <div id="Projects" className="relative z-10 bg-[#121212] max-w-[90%] mx-auto px-6 min-h-screen">
     <ProjectsSection />  {/* ← no space after < */}
      </div>
-    <div id="contact" className="bg-[#121212] flex items-center justify-center">
+     <Marquee />
+    <div id="contact" className="relative z-10 bg-[#121212] flex items-center justify-center">
       <Contact />
     </div>
 

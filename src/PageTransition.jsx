@@ -31,7 +31,7 @@ tl.set(containerRef.current, { display: 'block' })
   )
 
   .to(containerRef.current, {
-    duration: 0.4,
+    duration: 0.6,
     onComplete: () => onCover?.()
   })
 

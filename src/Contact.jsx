@@ -45,38 +45,39 @@ export default function Contact() {
           ~~~~~
         </div>
         <div className='flex flex-col md:flex-row gap-8'>
-        <div className="flex-col justify-center w-full md:w-1/2 gap-6 mt-6">
+        <div className="flex-col justify-center justify-between w-full md:w-1/2 gap-6 mt-6">
         <div>
             {/* Using a placeholder custom font class 'font-gothic' - replace with yours */}
-            <h2 className="text-6xl text-[#FF3333] vintage-font mb-4 tracking-wider">
+            <h2 className="text-6xl text-[#fffdd0] vintage-font mb-4 tracking-wider">
               Let's Talk
             </h2>
-            <p className="text-lg leading-relaxed text-gray-400">
+            <p className="text-lg leading-relaxed text-gray-400 py-4">
               Whether you have a question about my projects, want to collaborate on a new app, 
               or just want to talk about the latest in cybersecurity, feel free to drop a message.
             </p>
           </div>
 
           {/* Direct Contact Info */}
-          <div className="space-y-2 text-gray-300 font-mono">
+          <div className="space-y-2 py-5 text-gray-300 font-mono">
              <p>📍 Hubballi, Karnataka</p>
-             <p>✉️ <a href="mailto:sharanprakashrkasbag@example.com" className="hover:text-[#FF3333] transition-colors">sharanprakashrkasbag@example.com</a></p>
+             <p>✉️ <a href="mailto:sharanprakashrkasbag@gmail.com" className="hover:text-[#FF3333] transition-colors">sharanprakashrkasbag@gmail.com</a></p>
           </div>
-        <div className="flex space-x-6 text-2xl pt-4">
+          <div className="mt-6 py-5 text-center"></div>
+        <div className="flex space-x-6 justify-center flex-row justify-between text-2xl pt-4">
         <a href="https://github.com/Goldyeti2006" target="_blank" rel="noreferrer"
-          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+          className="text-5xl text-[#fffdd0] hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
           <FaGithub />
         </a>
-        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer"
-          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+        <a href="https://linkedin.com/in/sharanprakashrkasbag" target="_blank" rel="noreferrer"
+          className="text-5xl text-[#fffdd0] hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
           <FaLinkedin />
         </a>
-        <a href="https://instagram.com/yourusername" target="_blank" rel="noreferrer"
-          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+        <a href="https://instagram.com/sharan200616" target="_blank" rel="noreferrer"
+          className="text-5xl text-[#fffdd0]  hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
           <FaInstagram />
         </a>
         <a href="https://discord.gg/yourinvite" target="_blank" rel="noreferrer"
-          className="text-5xl text-gray-400 hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
+          className="text-5xl text-[#fffdd0] hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
           <FaDiscord />
         </a>
         </div>

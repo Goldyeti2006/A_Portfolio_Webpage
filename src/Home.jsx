@@ -35,17 +35,17 @@ export default function Home() {
         />
       </div>
       </div>
-      <div className="flex flex-row justify-center items-center">
-        <div className="w-1/2">
+      <div className="flex lg:flex-row flex-col justify-center items-center">
+        <div className="w-3/4  px-8">
       {/* Decorative */}
       <div className="text-[#FF3831] text-2xl">//</div>
       
       {/* Greeting */}
       <div className="flex flex-row items-baseline mb-4">
-      <p className="text-[#FF3831] font-mono text-lg mb-4">I'm</p>
+      <p className="text-[#FF3831] font-mono text-lg px-2 mb-8">I am </p>
       
       {/* Name */}
-      <h1 className="text-6xl md:text-6xl font-bold text-[#fffdd0] vintage-font mb-4">
+      <h1 className="text-4xl lg:text-6xl font-bold text-[#fffdd0] vintage-font mb-4">
         Sharanprakash R Kasbag
       </h1>
       </div>
@@ -94,7 +94,7 @@ export default function Home() {
           group-hover:text-[#FF3831]`}>Explore My Work →</span>
       </button>
        </div>
-       <div className="w-1/2 h-[500px]">
+       <div className="w-full lg:w-1/4 h-[500px]">
        <Canvas camera={{position:[0,0,4], fav: 50}}>
           {/* Matches your Ambient Light setup */}
           <ambientLight intensity={0.5} />

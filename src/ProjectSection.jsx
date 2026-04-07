@@ -215,26 +215,96 @@ export default function ProjectsSection() {
     </div>
 
     {/* RIGHT SIDE: MEDIA / VIDEO */}
-    <div className="w-full md:w-1/2 my-4">
       {/* Added a subtle glassmorphism border to make the video pop */}
+      <div className="w-full md:w-1/2 my-4">
+      {/* Glassmorphism border for the visual catch */}
       <div className="bg-white/5 border border-white/10 p-2 rounded-xl shadow-2xl">
-        <video 
-          width="100%" 
-          preload="metadata" 
-          className="rounded-lg object-cover"
-          autoPlay 
-          muted 
-          loop 
-        >
-          {/* Record a quick screen capture of you panning/zooming the 3D skull and drop it here */}
-          <source src="/diomede-demo.mp4" type="video/mp4" />
-        </video>
+        <img src="/diomede.png"
+                       className="rounded-lg object-cover"></img>
       </div>
     </div>
     
   </div>
 </ProjectFolder>
+<ProjectFolder
+  title="Kobold: HTB Machine"
+  preview={makePreview({ 
+    color: '#10b981', // A clean, cyber/terminal emerald green
+    tag: 'CTF Write-up', 
+    tagColor: '#ffffff',
+    image: 'CTF-popup.jpg', // Replace with your CTF cover or Arcane logo screenshot
+  })}
+>
+  <div className="flex flex-col md:flex-row items-start px-4 py-6 border border-white/20 gap-8">
+    
+    {/* LEFT SIDE: TEXT & LINKS */}
+    <div className="w-full md:w-1/2 text-white">
+      <h3 className="text-2xl font-bold mb-2">Kobold: Advanced Web Exploitation</h3>
 
+      <p className="project-pitch mb-4">
+        <strong>White Box Penetration Testing Journey</strong><br />
+        A comprehensive vulnerability analysis demonstrating advanced enumeration, source code auditing, and cryptographic exploitation against a custom Docker management platform (Arcane) built on a modern Go and SvelteKit stack.
+      </p>
+
+      <div className="project-section mb-4">
+        <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Tech Stack & Recon</h4>
+        <ul className="list-disc pl-5">
+          <li><strong>Reconnaissance:</strong> Nmap (Full Port Fuzzing), OSINT, Git Commit Analysis</li>
+          <li><strong>Web Exploitation:</strong> Burp Suite, Browser DevTools (SPA Chunk Analysis)</li>
+          <li><strong>Target Architecture:</strong> Golang Backend, SvelteKit Frontend, Docker/GitOps</li>
+          <li><strong>Vulnerabilities:</strong> JWT Cryptographic Forgery, API Security, Dev Secrets</li>
+        </ul>
+      </div>
+
+      <div className="project-section mb-4">
+        <h4 className="text-lg font-semibold border-b border-gray-600 pb-1 mb-2">Attack Path Highlights</h4>
+        <ul className="list-disc pl-5">
+          <li><strong>Single Page Application (SPA) Recon:</strong> Deconstructed SvelteKit JavaScript chunks via browser Developer Tools to map hidden frontend routing and unauthenticated API endpoints.</li>
+          <li><strong>White Box Source Code Review:</strong> Transitioned from Black Box testing to White Box auditing by locating the application's source code repository and analyzing backend Go logic.</li>
+          <li><strong>Cryptographic Token Forgery:</strong> Discovered hardcoded development secrets (`JWT_SECRET`) deployed to production. Reverse-engineered the Go backend to forge an administrative JSON Web Token (JWT) and bypass authentication.</li>
+        </ul>
+      </div>
+
+      <p className="project-concepts mb-6 text-sm text-gray-300">
+        <strong>Concepts Mastered:</strong> White Box Penetration Testing, Secure Code Auditing, JWT Cryptographic Forgery, Container (Docker) Attack Surfaces, and SPA Vulnerability Analysis.
+      </p>
+
+      {/* CALL TO ACTION BUTTONS */}
+      <div className="flex flex-wrap gap-4 mt-auto">
+        <button 
+          onClick={() => window.open("https://github.com/Goldyeti2006/My-CTF-Journey", "_blank")}
+          style={{ pointerEvents: 'auto', position: 'relative', zIndex: 50 }}
+          className="px-5 py-2.5 
+          bg-gray-800 
+          border border-gray-600
+           hover:bg-gray-700 
+           text-white rounded-lg 
+           transition-colors 
+           font-semibold 
+           flex items-center 
+           gap-2
+           hover:!translate-x-1 
+           hover:!-translate-y-2 
+           hover:!scale-[1.02] 
+           hover:!shadow-lg 
+           hover:!shadow-[#10b981]/20" /* Swapped to Emerald Green shadow */
+        >
+        Read Write-up
+        </button>
+      </div>
+    </div>
+
+    {/* RIGHT SIDE: MEDIA / VIDEO */}
+    <div className="w-full md:w-1/2 my-4">
+      {/* Glassmorphism border for the visual catch */}
+      <div className="bg-white/5 border border-white/10 p-2 rounded-xl shadow-2xl">
+        <img src="/CTF.png"
+                       className="rounded-lg object-cover"></img>
+      </div>
+    </div>
+    
+  </div>
+</ProjectFolder>
 
       {createPortal(
         <div

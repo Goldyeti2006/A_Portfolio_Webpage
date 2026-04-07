@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './App.css';
+import { RiContactsFill } from "react-icons/ri";
 
 export default function Header({ isXRayActive, toggleXRay, startTransition }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const handleNavClick = (targetId) => {
     setIsSidebarOpen(false); 
-    startTransition(targetId);
-    // 2. Start : black liquid curve animation
-    startTransition(); 
+    // FIX: Only call this once with the targetId
+    startTransition(targetId); 
+    
     setTimeout(() => {
       const target = document.querySelector(targetId);
       if (target) {
-        // Lenis will still keep it physically smooth
         window.scrollTo({
           top: target.offsetTop,
           behavior: 'instant' 
         });
       }
-    }, 800); 
+    }, 1200); 
   };
   const getPageName = () => {
     if (location.pathname === '/') return 'HOME';
@@ -29,7 +29,7 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-[100] p-6 mix-blend-difference text-white pointer-events-none `}>
+      <header className={`fixed top-0 left-0 px-[7%] w-full z-[100] p-6 mix-blend-difference text-white pointer-events-none `}>
         <nav className="flex justify-between items-center max-w-7xl mx-auto w-full pointer-events-auto">
           
           {/* LEFT: Current Page Name */}
@@ -64,15 +64,14 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
                     tracking-widest 
                     font-semibold 
                     uppercase 
-                    opacity-80 
-                    isolate">
+                    opacity-80">
   
   {/* Contact - boxed with slide fill */}
   <button onClick={() => handleNavClick('#contact')} className="
           group relative overflow-hidden
           border border-white/40 hover:border-white
           bg-[#FF3831] hover:bg-#000000/0
-          
+          flex items-center justify-center px-1
           text-[#fffdd0] hover:text-white
           outline-none appearance-none
           cursor-pointer
@@ -89,8 +88,8 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
 
 
       {/* Text flips color as fill slides in */}
-     <span className={`relative z-10 transition-colors duration-200 vintage-font text-2xl block sm:hidden
-    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>📱</span>
+     <span className={`relative z-10 transition-colors duration-200 vintage-font text-2xl inline-block sm:hidden px-3
+    ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}><RiContactsFill /></span>
     
     <span className={`relative z-10 transition-colors px-3 py-1 duration-200 vintage-font text-2xl hidden sm:block lg:hidden
     ${isXRayActive ? 'group-hover:text-#000000/0' : 'group-hover:text-[#FF3831]'}`}>Contact</span>
@@ -104,6 +103,7 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
     className='
     group relative overflow-hidden
     px-5 py-2
+    flex items-center justify-center
     border border-white/40 hover:border-white
     bg-[#FF3831] hover:bg-#000000/0
     text-[#fffdd0] hover:text-white
@@ -149,6 +149,12 @@ export default function Header({ isXRayActive, toggleXRay, startTransition }) {
               className="text-2xl hover:text-emerald-400 transition-colors tracking-widest"
             >
               Home
+            </button></li>
+            <li><button 
+              onClick={() => handleNavClick('#about')} 
+              className="text-2xl hover:text-emerald-400 transition-colors tracking-widest"
+            >
+              About Me
             </button></li>
             <li><button 
               onClick={() => handleNavClick('#Projects')} 

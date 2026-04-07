@@ -14,7 +14,7 @@
   font-weight: 840;
   color-scheme: light dark;
   color: #fffdd0;
-  background-color: rgb(18 18 18);
+  background-color: #121212;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -42,4 +42,18 @@ html, body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+}
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  /* 20s is the speed. 'linear' ensures it doesn't speed up or slow down. */
+  animation: marquee 20s linear infinite;
+}
+
+/* Optional: Pauses the scroll when the user hovers over it */
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
