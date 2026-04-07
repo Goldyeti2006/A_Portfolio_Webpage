@@ -59,8 +59,8 @@ export default function ProjectsSection() {
           image: 'Feather.jpg', 
         })}
       >
-        <div className="flex flex-col md:flex-row items-start px-4 py-6 border border-white/20 gap-8">
-        <div className="w-full md:w-1/2 text-white">
+        <div className="flex flex-row lg:flex-col items-start px-4 py-6 border border-white/20 gap-8">
+        <div className="w-full lg:w-1/2 text-white">
         <h3 className="text-2xl font-bold mb-2">Feather: Privacy-First Minimal Browser</h3>
 
         <p className="project-pitch mb-4">
@@ -135,10 +135,10 @@ export default function ProjectsSection() {
     image: 'Docom.jpg', // Replace with your screenshot
   })}
 >
-  <div className="flex flex-col md:flex-row items-start px-4 py-6 border border-white/20 gap-8">
+  <div className="flex flex-col lg:flex-row items-start px-4 py-6 border border-white/20 gap-8">
     
     {/* LEFT SIDE: TEXT & LINKS */}
-    <div className="w-full md:w-1/2 text-white">
+    <div className="w-full lg:w-1/2 text-white">
       <h3 className="text-2xl font-bold mb-2">Diomede: 3D DICOM Ecosystem</h3>
 
       <p className="project-pitch mb-4">
@@ -235,10 +235,10 @@ export default function ProjectsSection() {
     image: 'CTF-popup.jpg', // Replace with your CTF cover or Arcane logo screenshot
   })}
 >
-  <div className="flex flex-col md:flex-row items-start px-4 py-6 border border-white/20 gap-8">
+  <div className="flex flex-col lg:flex-row items-start px-4 py-6 border border-white/20 gap-8">
     
     {/* LEFT SIDE: TEXT & LINKS */}
-    <div className="w-full md:w-1/2 text-white">
+    <div className="w-full lg:w-1/2 text-white">
       <h3 className="text-2xl font-bold mb-2">Kobold: Advanced Web Exploitation</h3>
 
       <p className="project-pitch mb-4">
