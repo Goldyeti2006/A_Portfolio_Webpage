@@ -45,7 +45,7 @@ export default function Contact() {
           ~~~~~
         </div>
         <div className='flex flex-col lg:flex-row gap-8'>
-        <div className="flex-col justify-center justify-between w-full md:w-1/2 gap-6 mt-6">
+        <div className="flex-col justify-center justify-between w-full lg:w-1/2 gap-6 mt-6">
         <div>
             {/* Using a placeholder custom font class 'font-gothic' - replace with yours */}
             <h2 className="text-6xl text-[#fffdd0] vintage-font mb-4 tracking-wider">
@@ -82,7 +82,7 @@ export default function Contact() {
         </a>
         </div>
       </div>
-        <div className="w-full md:w-1/2 mb-12 gap-3 rounded-lg border border-white/20 px-10 py-10">
+        <div className="w-full lg:w-1/2 mb-12 gap-3 rounded-lg border border-white/20 px-10 py-10">
         <h2 className="text-5xl md:text-6xl font-bold text-center text-[#FF3831] mt-4 mb-12 vintage-font">
           Contact Me
         </h2>

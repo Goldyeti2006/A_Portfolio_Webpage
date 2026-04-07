@@ -59,7 +59,7 @@ export default function ProjectsSection() {
           image: 'Feather.jpg', 
         })}
       >
-        <div className="flex flex-row lg:flex-col items-start px-4 py-6 border border-white/20 gap-8">
+        <div className="flex flex-col lg:flex-row items-start px-4 py-6 border border-white/20 gap-8">
         <div className="w-full lg:w-1/2 text-white">
         <h3 className="text-2xl font-bold mb-2">Feather: Privacy-First Minimal Browser</h3>
 
@@ -113,7 +113,7 @@ export default function ProjectsSection() {
         Source Code
         </button>
         </div>
-        <div className="bg-white/20 w-full md:w-1/2 my-4">
+        <div className="bg-white/20 w-full lg:w-1/2 my-4">
         {/* Video right here - part of Feather's content */}
         <video width="100%" 
         preload="metadata" 
@@ -216,7 +216,7 @@ export default function ProjectsSection() {
 
     {/* RIGHT SIDE: MEDIA / VIDEO */}
       {/* Added a subtle glassmorphism border to make the video pop */}
-      <div className="w-full md:w-1/2 my-4">
+      <div className="w-full lg:w-1/2 my-4">
       {/* Glassmorphism border for the visual catch */}
       <div className="bg-white/5 border border-white/10 p-2 rounded-xl shadow-2xl">
         <img src="/diomede.png"
@@ -295,11 +295,10 @@ export default function ProjectsSection() {
     </div>
 
     {/* RIGHT SIDE: MEDIA / VIDEO */}
-    <div className="w-full md:w-1/2 my-4">
+    <div className="w-full lg:w-1/2 my-4">
       {/* Glassmorphism border for the visual catch */}
       <div className="bg-white/5 border border-white/10 p-2 rounded-xl shadow-2xl">
-        <img src="/CTF.png"
-                       className="rounded-lg object-cover"></img>
+        <img src="/CTF.png" className="rounded-lg object-cover"></img>
       </div>
     </div>
     
