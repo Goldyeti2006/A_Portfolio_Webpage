@@ -76,7 +76,7 @@ export default function Contact() {
           className="text-5xl text-[#fffdd0]  hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
           <FaInstagram />
         </a>
-        <a href="https://discord.gg/yourinvite" target="_blank" rel="noreferrer"
+        <a href="https://discord.gg/96XJDXy9" target="_blank" rel="noreferrer"
           className="text-5xl text-[#fffdd0] hover:text-[#FF3831] hover:translate-y-[-5px] transition-colors">
           <FaDiscord />
         </a>
