@@ -6,7 +6,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import EyeballModel from "./EyeballModel.jsx";
 
 
-export default function Home() {
+export default function Home({ startTransition }) {
   const navigate = useNavigate();
   const handleNavClick = (targetId) => {
     startTransition(targetId);
@@ -71,7 +71,7 @@ export default function Home() {
       
       {/* CTA */}
       <button 
-         onClick={() => document.getElementById('Projects')?.scrollIntoView({ behavior: 'smooth' })}
+         onClick={() => startTransition('#Projects')}
         className="w-fit px-8 py-3 group relative overflow-hidden
           border border-white/40
           bg-[#FF3831]
@@ -82,7 +82,7 @@ export default function Home() {
           transition-all duration-200"
       >
         {/* Fill layer - slides in from left */}
-        <span className={`
+        <span className={` 
           absolute inset-0
           bg-[#fffdc9]
           -translate-x-full group-hover:translate-x-0

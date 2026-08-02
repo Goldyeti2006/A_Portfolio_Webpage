@@ -56,7 +56,7 @@ export default function ProjectsSection() {
           color: '#fc6100', 
           tag: 'A Lightweight Browser', 
           tagColor: '#222222',
-          image: 'Feather.jpg', 
+          image: 'Feather.webp', 
         })}
       >
         <div className="flex flex-col lg:flex-row items-start px-4 py-6 border border-white/20 gap-8">
@@ -132,7 +132,7 @@ export default function ProjectsSection() {
     color: '#0ea5e9', // A clean, medical/tech blue
     tag: '3D Medical Viewer', 
     tagColor: '#ffffff',
-    image: 'Docom.jpg', // Replace with your screenshot
+    image: 'Docom.webp', // Replace with your screenshot
   })}
 >
   <div className="flex flex-col lg:flex-row items-start px-4 py-6 border border-white/20 gap-8">
@@ -232,7 +232,7 @@ export default function ProjectsSection() {
     color: '#10b981', // A clean, cyber/terminal emerald green
     tag: 'CTF Write-up', 
     tagColor: '#ffffff',
-    image: 'CTF-popup.jpg', // Replace with your CTF cover or Arcane logo screenshot
+    image: 'CTF-popup.webp', // Replace with your CTF cover or Arcane logo screenshot
   })}
 >
   <div className="flex flex-col lg:flex-row items-start px-4 py-6 border border-white/20 gap-8">

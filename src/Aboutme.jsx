@@ -126,36 +126,14 @@ export default function Aboutme() {
             </div>
 
             {/* LeetCode DSA */}
+            <div className="stat-card bg-[#0a0a0a] border border-white/10 p-8 rounded-xl flex-1 group overflow-hidden relative">
+           <div className="absolute top-0 left-0 w-full h-1 bg-[#FF3831] to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
             <div className="stat-card bg-[#0a0a0a] border border-white/10 p-8 rounded-xl overflow-hidden relative group">
-             <div className="absolute top-0 left-0 w-full h-1 bg-[#FF3831] to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-               <h3 className="text-xl font-bold mb-6 flex items-center text-[#fffdd0] justify-between">
-                 Algorithmic DSA
-                 <span className="text-xs font-mono bg-yellow-500/20 text-yellow-500 px-2 py-1 rounded">LeetCode</span>
-               </h3>
-               
-               <div className="flex items-end gap-4 mb-6">
-                 <span className="text-5xl font-extrabold">70+</span>
-                 <span className="text-gray-500 font-mono mb-1">Total Solved</span>
-               </div>
-
-               <div className="space-y-3 font-mono text-sm">
-                  <div className="flex items-center gap-3">
-                    <span className="w-16 text-emerald-400">Easy</span>
-                    <div className="flex-1 bg-black h-1.5 rounded-full"><div className="bg-emerald-400 h-1.5 rounded-full" style={{width: '60%'}}></div></div>
-                    <span className="w-8 text-right">40+</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="w-16 text-yellow-400">Medium</span>
-                    <div className="flex-1 bg-black h-1.5 rounded-full"><div className="bg-yellow-400 h-1.5 rounded-full" style={{width: '30%'}}></div></div>
-                    <span className="w-8 text-right">25+</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="w-16 text-[#FF3831]">Hard</span>
-                    <div className="flex-1 bg-black h-1.5 rounded-full"><div className="bg-[#FF3831] h-1.5 rounded-full" style={{width: '10%'}}></div></div>
-                    <span className="w-8 text-right">3</span>
-                  </div>
-               </div>
+             <a href="https://www.readmecodegen.com/leetcode-stats-generator/leetcode-stats-card-generator-for-github">
+              <img src="https://www.readmecodegen.com/api/leetcode-stats?username=goldyeti2006&theme=github_dark" alt="LeetCode Stats" />
+            </a>
             </div>
+          </div>
           </div>
 
           {/* Bottom Row: Certifications & Badges */}
