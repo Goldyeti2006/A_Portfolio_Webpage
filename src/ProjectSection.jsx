@@ -33,10 +33,11 @@ export default function ProjectsSection() {
   return (
     <div className="text-left p-6 text-[#fffdd0]">
         <div className="h-20 mt-4 flex text-6xl items-center justify-center text-[#FF3831]">~~~~~</div>
-        <div className="text-4xl md:text-5xl font-bold mb-12 flex flex-col md:flex-row items-center justify-center gap-3">
-          <CyclingText words={['Projects' , 'Experiences' , 'lessons']}  className="text-6xl font-bold text-center text-[#FF3831]" direction='up'/>
-           <span className="shrink-0 whitespace-nowrap text-6xl font-bold"> I've</span>
-           <CyclingText words={[' built',' developed', 'learned']}  className="text-6xl font-bold text-center" direction='down'/></div>
+        <div className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-12 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center">
+          <CyclingText words={['Projects', 'Experiences', 'Lessons']} className="text-3xl sm:text-5xl lg:text-6xl font-bold text-center text-[#FF3831]" direction='up'/>
+          <span className="shrink-0 text-3xl sm:text-5xl lg:text-6xl font-bold">I've</span>
+          <CyclingText words={['built', 'developed', 'learned']} className="text-3xl sm:text-5xl lg:text-6xl font-bold text-center" direction='down'/>
+        </div>
        <ProjectFolder
   
         title="ESP32 Hardware Analysis"
@@ -309,7 +310,7 @@ export default function ProjectsSection() {
         <div
           ref={popupRef}
           className="fixed pointer-events-none z-[999] rounded-2xl overflow-hidden
-                     flex flex-col items-center justify-center gap-3 p-6
+                     hidden md:flex flex-col items-center justify-center gap-3 p-6
                      min-w-[180px] min-h-[160px]"
           style={{
             background: displayData?.color,  // ← always has a color

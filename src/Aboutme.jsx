@@ -128,7 +128,7 @@ export default function Aboutme() {
             {/* LeetCode DSA */}
             <div className="stat-card bg-[#0a0a0a] border border-white/10 p-8 rounded-xl flex-1 group overflow-hidden relative">
            <div className="absolute top-0 left-0 w-full h-1 bg-[#FF3831] to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <div className="stat-card bg-[#0a0a0a] border border-white/10 p-8 rounded-xl overflow-hidden relative group">
+            <div className="stat-card bg-[#0a0a0a] rounded-xl overflow-hidden relative group" align="center">
              <a href="https://www.readmecodegen.com/leetcode-stats-generator/leetcode-stats-card-generator-for-github">
               <img src="https://www.readmecodegen.com/api/leetcode-stats?username=goldyeti2006&theme=github_dark" alt="LeetCode Stats" />
             </a>

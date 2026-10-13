@@ -47,7 +47,7 @@ export default function HeroReveal({ isXRayActive, mousePos }) {
 
   // This function decides if the hole punch exists or not
   const getMaskStyle = () => {
-    if (!isXRayActive) return { maskImage: 'none', WebkitMaskImage: 'none' };
+    if (!isXRayActive || mousePos.x === -1000) return { maskImage: 'none', WebkitMaskImage: 'none' };
 
     return {
       WebkitMaskImage: `radial-gradient(circle at ${mousePos.x}px ${mousePos.y}px, transparent 150px, black 180px)`,
@@ -141,8 +141,8 @@ export default function HeroReveal({ isXRayActive, mousePos }) {
             O B S E S S I O N
           </span>
         </div>
-         <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight mb-4 text-center">
-            Securely Designed <br/><p className='text-[#FF3831] text-4xl md:text-6xl'> & </p> Creatively Hardened.
+         <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight mb-4 text-center">
+            Securely Designed <br/><span className='text-[#FF3831] text-3xl sm:text-5xl md:text-6xl inline-block my-1'> & </span><br className="sm:hidden"/> Creatively Hardened.
          </h1>
          <p className="text-xl md:text-2xl font-light text-center max-w-2xl text-gray-600">
             Clean interfaces masking impenetrable architecture.

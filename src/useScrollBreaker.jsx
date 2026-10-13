@@ -7,6 +7,8 @@ export function useScrollBreaker(lenisRef, sectionIds, pauseDuration = 200) {
   const lastScroll = useRef(0);
 
   useEffect(() => {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) return;
     let cleanup;
 
     const init = () => {
@@ -32,24 +34,24 @@ export function useScrollBreaker(lenisRef, sectionIds, pauseDuration = 200) {
           return Math.abs(scroll - top) < buffer;
         });
 
-       if (crossed) {
-  GLOBAL_BROKEN = true;
-  GLOBAL_LAST_TIME = Date.now();
+        if (crossed) {
+          GLOBAL_BROKEN = true;
+          GLOBAL_LAST_TIME = Date.now();
 
-  // Snap exactly to section top, then freeze
-  lenis.scrollTo(crossed.top, { 
-    immediate: true,  // no animation, just snap
-    force: true       // override any ongoing scroll
-  });
-  
-  // Small delay so the snap renders before stopping
-  setTimeout(() => lenis.stop(), 16); // one frame later
+          // Snap exactly to section top, then freeze
+          lenis.scrollTo(crossed.top, {
+            immediate: true,  // no animation, just snap
+            force: true       // override any ongoing scroll
+          });
 
-  setTimeout(() => {
-    lenis.start();
-    GLOBAL_BROKEN = false;
-  }, pauseDuration);
-}
+          // Small delay so the snap renders before stopping
+          setTimeout(() => lenis.stop(), 16); // one frame later
+
+          setTimeout(() => {
+            lenis.start();
+            GLOBAL_BROKEN = false;
+          }, pauseDuration);
+        }
       };
 
       lenis.on('scroll', handleScroll);
